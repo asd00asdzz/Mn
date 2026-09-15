@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>สื่อการสอน | ROBLOX DEV</title>
 
 <style>
@@ -47,8 +48,6 @@ background:#766cff;
 color:white;
 }
 
-/* ADMIN MENU */
-
 #adminNav{
 display:none;
 margin-left:auto;
@@ -59,8 +58,6 @@ background:#766cff !important;
 color:white !important;
 font-weight:bold;
 }
-
-/* HERO */
 
 .hero{
 text-align:center;
@@ -77,15 +74,11 @@ margin-bottom:10px;
 color:#aeb5c5;
 }
 
-/* CONTAINER */
-
 .container{
 max-width:1200px;
 margin:auto;
 padding:35px 20px;
 }
-
-/* BOX */
 
 .auth-box,
 .status{
@@ -115,8 +108,6 @@ font-size:45px;
 margin-bottom:15px;
 }
 
-/* GOOGLE */
-
 .google-btn{
 width:100%;
 padding:14px;
@@ -138,8 +129,6 @@ opacity:.6;
 cursor:not-allowed;
 }
 
-/* LOGOUT */
-
 .logout{
 margin-top:20px;
 padding:11px 16px;
@@ -151,8 +140,6 @@ cursor:pointer;
 font-weight:bold;
 }
 
-/* ADMIN BUTTON */
-
 .admin-btn{
 display:inline-block;
 margin-top:15px;
@@ -163,12 +150,6 @@ color:white;
 text-decoration:none;
 font-weight:bold;
 }
-
-.admin-btn:hover{
-opacity:.9;
-}
-
-/* TEACHING */
 
 #teachingContent{
 display:none;
@@ -182,8 +163,6 @@ border-radius:9px;
 font-weight:bold;
 margin-bottom:15px;
 }
-
-/* GRID */
 
 .grid{
 display:grid;
@@ -241,7 +220,16 @@ font-size:13px;
 margin-top:8px;
 }
 
-/* MOBILE */
+.error-box{
+max-width:600px;
+margin:30px auto;
+padding:20px;
+background:#211116;
+border:1px solid #71313c;
+border-radius:15px;
+color:#ff9da8;
+display:none;
+}
 
 @media(max-width:800px){
 
@@ -261,10 +249,6 @@ justify-content:center;
 margin-left:0;
 width:100%;
 text-align:center;
-}
-
-nav a{
-font-size:14px;
 }
 
 .grid{
@@ -297,8 +281,6 @@ font-size:30px;
 <a href="shop.html">
 ร้านค้า
 </a>
-
-<!-- ADMIN MENU -->
 
 <div id="adminNav">
 
@@ -335,7 +317,9 @@ class="admin-nav-btn">
 
 <!-- LOGIN -->
 
-<div id="loginBox" class="auth-box">
+<div
+id="loginBox"
+class="auth-box">
 
 <div class="status-icon">
 🔐
@@ -399,7 +383,8 @@ style="display:none;">
 </h2>
 
 <p>
-ส่งคำขอเข้าใช้งานเรียบร้อยแล้ว<br>
+ส่งคำขอเข้าใช้งานเรียบร้อยแล้ว
+<br>
 กรุณารอแอดมินอนุมัติ
 </p>
 
@@ -431,6 +416,7 @@ style="display:none;">
 
 <p>
 บัญชีของคุณยังไม่ได้รับอนุญาต
+<br>
 ให้เข้าใช้งานสื่อการสอน
 </p>
 
@@ -445,13 +431,22 @@ class="logout">
 </div>
 
 
+<!-- ERROR -->
+
+<div
+id="errorBox"
+class="error-box">
+
+<div id="errorText"></div>
+
+</div>
+
+
 <!-- TEACHING -->
 
 <section id="teachingContent">
 
 <div style="margin-bottom:25px;">
-
-<!-- ADMIN BADGE -->
 
 <div
 id="adminBadge"
@@ -480,9 +475,6 @@ id="userInfo"
 class="user-info">
 </p>
 
-
-<!-- ADMIN AREA -->
-
 <div
 id="adminArea"
 style="display:none;">
@@ -499,8 +491,6 @@ class="admin-btn">
 
 </div>
 
-
-<!-- VIDEOS -->
 
 <div
 id="videos"
@@ -535,7 +525,7 @@ from
 import {
 getAuth,
 GoogleAuthProvider,
-signInWithRedirect,
+signInWithPopup,
 onAuthStateChanged,
 signOut
 }
@@ -581,12 +571,14 @@ new GoogleAuthProvider();
 
 
 provider.setCustomParameters({
+
 prompt:"select_account"
+
 });
 
 
 /* ==================================================
-   ADMIN EMAIL
+   ADMIN
 ================================================== */
 
 const ADMIN_EMAIL =
@@ -636,6 +628,12 @@ document.getElementById("adminNav");
 const userInfo =
 document.getElementById("userInfo");
 
+const errorBox =
+document.getElementById("errorBox");
+
+const errorText =
+document.getElementById("errorText");
+
 
 /* ==================================================
    HIDE ALL
@@ -664,6 +662,39 @@ adminBadge.style.display =
 adminArea.style.display =
 "none";
 
+errorBox.style.display =
+"none";
+
+}
+
+
+/* ==================================================
+   SHOW ERROR
+================================================== */
+
+function showError(error){
+
+hideAll();
+
+errorBox.style.display =
+"block";
+
+errorText.innerHTML = `
+
+<strong>
+เกิดข้อผิดพลาด
+</strong>
+
+<br><br>
+
+${esc(error.code || "")}
+
+<br>
+
+${esc(error.message || "")}
+
+`;
+
 }
 
 
@@ -671,7 +702,10 @@ adminArea.style.display =
    SHOW TEACHING
 ================================================== */
 
-function showTeaching(user,isAdmin){
+function showTeaching(
+user,
+isAdmin
+){
 
 hideAll();
 
@@ -682,10 +716,6 @@ userInfo.textContent =
 "บัญชี: "+
 (user.email || "");
 
-
-/* ==================================================
-   ADMIN
-================================================== */
 
 if(isAdmin){
 
@@ -704,7 +734,6 @@ adminNav.style.display =
 "none";
 
 }
-
 
 loadVideos();
 
@@ -725,25 +754,80 @@ googleLogin.disabled =
 true;
 
 googleLogin.textContent =
-"กำลังเปิด Google...";
+"กำลังเข้าสู่ระบบ...";
 
-await signInWithRedirect(
+
+const result =
+await signInWithPopup(
 auth,
 provider
 );
 
+
+const user =
+result.user;
+
+
+console.log(
+"GOOGLE LOGIN SUCCESS:",
+user.email
+);
+
+
+/*
+   สำคัญ:
+   ไม่ต้องเปลี่ยนหน้าเองสำหรับ User
+   onAuthStateChanged จะทำงานต่อ
+*/
+
+
 }catch(error){
 
 console.error(
-"LOGIN ERROR:",
+"GOOGLE LOGIN ERROR:",
 error
 );
+
 
 googleLogin.disabled =
 false;
 
 googleLogin.textContent =
 "🔐 เข้าสู่ระบบด้วย Google";
+
+
+/*
+   ถ้าผู้ใช้ปิดหน้าต่าง Google
+*/
+
+if(
+error.code ===
+"auth/popup-closed-by-user"
+){
+
+return;
+
+}
+
+
+/*
+   ถ้า Popup ถูกบล็อก
+*/
+
+if(
+error.code ===
+"auth/popup-blocked"
+){
+
+alert(
+"เบราว์เซอร์บล็อกหน้าต่าง Google\n\n"+
+"กรุณาอนุญาต Popup แล้วลองใหม่"
+);
+
+return;
+
+}
+
 
 alert(
 "เข้าสู่ระบบไม่สำเร็จ\n\n"+
@@ -772,7 +856,7 @@ user
 
 
 /* ==================================================
-   ยังไม่ได้ LOGIN
+   NOT LOGIN
 ================================================== */
 
 if(!user){
@@ -797,11 +881,13 @@ return;
 
 
 /* ==================================================
-   LOGIN สำเร็จ
+   LOGIN SUCCESS
 ================================================== */
 
 const email =
-(user.email || "").toLowerCase();
+(user.email || "")
+.toLowerCase()
+.trim();
 
 
 console.log(
@@ -820,18 +906,24 @@ ADMIN_EMAIL.toLowerCase()
 ){
 
 console.log(
-"ADMIN DETECTED:",
-email
+"ADMIN DETECTED"
 );
 
 
 /*
-   Admin ไม่ต้องรออนุมัติ
+   แสดงเมนู Admin ก่อน
 */
 
-showTeaching(
-user,
-true
+adminNav.style.display =
+"block";
+
+
+/*
+   เข้า Admin โดยตรง
+*/
+
+window.location.replace(
+"admin.html"
 );
 
 return;
@@ -840,7 +932,7 @@ return;
 
 
 /* ==================================================
-   USER ปกติ
+   USER NORMAL
 ================================================== */
 
 adminNav.style.display =
@@ -877,7 +969,7 @@ requestRef
 
 
 /* ==================================================
-   ยังไม่มีคำขอ
+   NO REQUEST
 ================================================== */
 
 if(
@@ -887,6 +979,7 @@ if(
 console.log(
 "สร้างคำขอใหม่"
 );
+
 
 await setDoc(
 requestRef,
@@ -913,6 +1006,7 @@ serverTimestamp()
 }
 );
 
+
 pendingBox.style.display =
 "block";
 
@@ -922,7 +1016,7 @@ return;
 
 
 /* ==================================================
-   มีคำขอแล้ว
+   REQUEST DATA
 ================================================== */
 
 const data =
@@ -986,16 +1080,7 @@ console.error(
 error
 );
 
-checkingTitle.textContent =
-"เกิดข้อผิดพลาด";
-
-checkingText.innerHTML =
-"ไม่สามารถตรวจสอบสิทธิ์ได้<br><br>"+
-"<small>"+
-esc(error.code || "")+
-"<br>"+
-esc(error.message || "")+
-"</small>";
+showError(error);
 
 }
 
@@ -1021,11 +1106,14 @@ return;
 videosLoaded =
 true;
 
+
 videosBox.innerHTML = `
 
 <p style="
 color:#aaa;
 grid-column:1/-1;
+text-align:center;
+padding:40px;
 ">
 
 กำลังโหลดวิดีโอ...
@@ -1056,6 +1144,7 @@ videoDoc=>{
 const data =
 videoDoc.data();
 
+
 const title =
 String(
 data.title || ""
@@ -1076,7 +1165,7 @@ category
 
 
 /*
-   เฉพาะสื่อการสอน
+   ค้นหาวิดีโอการสอน
 */
 
 if(
@@ -1151,7 +1240,7 @@ return;
 
 
 /* ==================================================
-   RENDER
+   DISPLAY
 ================================================== */
 
 videosBox.innerHTML =
@@ -1215,6 +1304,11 @@ console.error(
 error
 );
 
+
+videosLoaded =
+false;
+
+
 videosBox.innerHTML = `
 
 <p style="
@@ -1263,7 +1357,8 @@ await signOut(auth);
 
 location.reload();
 
-}catch(error){
+}
+catch(error){
 
 console.error(error);
 
@@ -1288,7 +1383,8 @@ await signOut(auth);
 
 location.reload();
 
-}catch(error){
+}
+catch(error){
 
 console.error(error);
 
@@ -1324,4 +1420,4 @@ char=>({
 </script>
 
 </body>
-  </html>
+   </html>
