@@ -1,12 +1,18 @@
-◌ุ<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1.0"
+>
 
 <title>Admin | Roblox Dev</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -16,12 +22,12 @@
 body{
     font-family:Arial,sans-serif;
     background:#070a11;
-    color:#fff;
+    color:white;
     padding:20px;
 }
 
 .container{
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
 }
 
@@ -29,61 +35,97 @@ header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:10px;
+    gap:15px;
     margin-bottom:20px;
 }
 
+.header-right{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
 h1{
-    font-size:25px;
+    font-size:26px;
 }
 
 h2{
     margin-bottom:15px;
 }
 
+h3{
+    margin-bottom:8px;
+}
+
 .card{
     background:#0e1320;
     border:1px solid #20283a;
-    border-radius:15px;
-    padding:18px;
+    border-radius:16px;
+    padding:20px;
     margin-bottom:18px;
 }
 
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:15px;
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,1fr));
+    gap:16px;
+}
+
+label{
+    display:block;
+    font-size:14px;
+    color:#cbd5e1;
+    margin-top:5px;
 }
 
 input,
 textarea,
 select{
     width:100%;
-    padding:11px;
-    margin:7px 0 12px;
+    padding:12px;
+    margin-top:7px;
+    margin-bottom:13px;
     background:#101522;
-    color:#fff;
+    color:white;
     border:1px solid #273044;
-    border-radius:9px;
+    border-radius:10px;
+    outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#5865f2;
 }
 
 textarea{
-    min-height:90px;
+    min-height:100px;
     resize:vertical;
+}
+
+input[type="file"]{
+    padding:10px;
+    cursor:pointer;
 }
 
 button{
     border:0;
-    border-radius:9px;
-    padding:10px 14px;
+    border-radius:10px;
+    padding:11px 15px;
     background:#5865f2;
-    color:#fff;
+    color:white;
     font-weight:bold;
     cursor:pointer;
 }
 
 button:hover{
     opacity:.9;
+}
+
+button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
 }
 
 .danger{
@@ -98,26 +140,85 @@ button:hover{
     background:#d97706;
 }
 
+.secondary{
+    background:#334155;
+}
+
 .small{
     font-size:13px;
     color:#94a3b8;
+}
+
+.file-info{
+    background:#111827;
+    border:1px dashed #334155;
+    padding:10px;
+    border-radius:10px;
+    margin-top:-5px;
+    margin-bottom:12px;
+    font-size:13px;
+    color:#94a3b8;
+}
+
+.preview{
+    max-width:180px;
+    max-height:120px;
+    border-radius:10px;
+    margin:5px 0 12px;
+    display:none;
+    object-fit:cover;
+}
+
+.progress-box{
+    display:none;
+    margin-top:15px;
+}
+
+.progress-text{
+    font-size:13px;
+    color:#cbd5e1;
+    margin-bottom:7px;
+}
+
+progress{
+    width:100%;
+    height:20px;
 }
 
 .item{
     background:#111827;
     border:1px solid #273044;
     border-radius:12px;
-    padding:14px;
+    padding:15px;
     margin:10px 0;
 }
 
 .badge{
     display:inline-block;
     background:#26324d;
-    padding:5px 8px;
+    padding:5px 9px;
     border-radius:7px;
     font-size:12px;
     margin-bottom:8px;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 8px;
+    border-radius:7px;
+    font-size:12px;
+}
+
+.status-approved{
+    background:#14532d;
+}
+
+.status-pending{
+    background:#713f12;
+}
+
+.status-denied{
+    background:#7f1d1d;
 }
 
 #app{
@@ -125,14 +226,10 @@ button:hover{
 }
 
 #loginBox{
-    max-width:420px;
+    max-width:430px;
     margin:80px auto;
     text-align:center;
 }
-
-/* =========================
-   NOTIFICATION
-========================= */
 
 #noticeBtn{
     position:relative;
@@ -143,51 +240,34 @@ button:hover{
     position:absolute;
     right:-6px;
     top:-7px;
-
     background:#ef4444;
-
     border-radius:50%;
-
-    min-width:20px;
-    height:20px;
-
+    min-width:21px;
+    height:21px;
     display:none;
-
     align-items:center;
     justify-content:center;
-
     font-size:11px;
 }
 
 #noticePanel{
     display:none;
-
     position:fixed;
-
     right:20px;
     top:70px;
-
-    width:min(430px,calc(100vw - 40px));
-
+    width:min(450px,calc(100vw - 40px));
     max-height:70vh;
-
     overflow:auto;
-
     background:#0e1320;
-
     border:1px solid #334155;
-
-    border-radius:14px;
-
-    padding:14px;
-
-    z-index:100;
-
+    border-radius:15px;
+    padding:15px;
+    z-index:1000;
     box-shadow:0 20px 60px #000;
 }
 
 .notice{
-    padding:12px;
+    padding:13px;
     border-bottom:1px solid #273044;
 }
 
@@ -195,30 +275,84 @@ button:hover{
     border-bottom:0;
 }
 
-.noticeMeta{
-    font-size:12px;
-    color:#94a3b8;
-    margin-top:5px;
+.notice.unread{
+    border-left:4px solid #5865f2;
 }
 
-.noticeUnread{
-    border-left:3px solid #5865f2;
+.notice-meta{
+    font-size:12px;
+    color:#94a3b8;
+    margin-top:7px;
+}
+
+.empty{
+    text-align:center;
+    padding:25px;
+    color:#94a3b8;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.file-required{
+    color:#f87171;
+}
+
+@media(max-width:600px){
+
+    body{
+        padding:10px;
+    }
+
+    header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .header-right{
+        width:100%;
+    }
+
+    .header-right button{
+        flex:1;
+    }
+
+    #noticePanel{
+        right:10px;
+        width:calc(100vw - 20px);
+    }
+
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- =========================
+
+<!-- ==================================================
      LOGIN
-========================= -->
+================================================== -->
 
-<div id="loginBox" class="card">
+<div
+    id="loginBox"
+    class="card"
+>
 
-    <h1>🔐 Admin Panel</h1>
+    <h1>
+        🔐 Admin Panel
+    </h1>
 
-    <p class="small" style="margin:12px">
+    <p
+        class="small"
+        style="margin:12px 0 18px"
+    >
         เข้าสู่ระบบด้วย Gmail แอดมิน
     </p>
 
@@ -226,398 +360,579 @@ button:hover{
         เข้าสู่ระบบ Google
     </button>
 
-    <p id="loginMsg"
-       class="small"
-       style="margin-top:12px">
-    </p>
+    <p
+        id="loginMsg"
+        class="small"
+        style="margin-top:12px"
+    ></p>
 
 </div>
 
 
-<!-- =========================
-     APP
-========================= -->
 
-<div id="app" class="container">
+<!-- ==================================================
+     APP
+================================================== -->
+
+<div
+    id="app"
+    class="container"
+>
+
 
 <header>
 
-<div>
+    <div>
 
-<h1>
-🛠️ Admin Panel
-</h1>
+        <h1>
+            🛠️ Admin Panel
+        </h1>
 
-<div id="adminEmail"
-     class="small">
-</div>
+        <div
+            id="adminEmail"
+            class="small"
+        ></div>
 
-</div>
-
-
-<div style="
-display:flex;
-gap:8px;
-">
-
-<button id="noticeBtn">
-
-🔔 แจ้งเตือน
-
-<span id="noticeCount">
-</span>
-
-</button>
+    </div>
 
 
-<button id="logoutBtn">
-ออกจากระบบ
-</button>
+    <div class="header-right">
 
-</div>
+        <button id="noticeBtn">
+
+            🔔 แจ้งเตือน
+
+            <span id="noticeCount">
+            </span>
+
+        </button>
+
+        <button id="logoutBtn">
+            ออกจากระบบ
+        </button>
+
+    </div>
 
 </header>
 
 
-<!-- =========================
-     NOTIFICATION PANEL
-========================= -->
+
+<!-- ==================================================
+     NOTIFICATIONS
+================================================== -->
 
 <div id="noticePanel">
 
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:10px;
-">
+    <div
+        style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:10px;
+        margin-bottom:12px;
+        "
+    >
 
-<h3>
-🔔 แจ้งเตือน
-</h3>
+        <h3>
+            🔔 แจ้งเตือน
+        </h3>
 
-<button id="readAllBtn"
-        class="success">
+        <button
+            id="readAllBtn"
+            class="success"
+        >
+            อ่านทั้งหมด
+        </button>
 
-อ่านทั้งหมด
+    </div>
 
-</button>
+    <div id="noticeList">
+
+        <div class="empty">
+            กำลังโหลด...
+        </div>
+
+    </div>
 
 </div>
 
 
-<div id="noticeList">
 
-<div class="small">
-กำลังโหลดแจ้งเตือน...
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- =========================
+<!-- ==================================================
      ADD PRODUCT
-========================= -->
+================================================== -->
 
 <section class="card">
 
-<h2>
-➕ เพิ่มสินค้า
-</h2>
+    <div class="section-title">
+
+        <h2>
+            ➕ เพิ่มสินค้า
+        </h2>
+
+        <span class="badge">
+            อัปโหลดจากเครื่อง
+        </span>
+
+    </div>
 
 
-<div class="grid">
-
-<div>
-
-<label>
-ชื่อสินค้า
-</label>
-
-<input
-id="pTitle"
-placeholder="ชื่อสินค้า"
->
+    <div class="grid">
 
 
-<label>
-รายละเอียด
-</label>
+        <!-- LEFT -->
 
-<textarea
-id="pDesc"
-placeholder="รายละเอียดสินค้า">
-</textarea>
+        <div>
 
+            <label>
+                ชื่อสินค้า
+                <span class="file-required">*</span>
+            </label>
 
-<label>
-หมวดหมู่
-</label>
-
-<input
-id="pCategory"
-placeholder="เช่น UI, Script, Model"
->
+            <input
+                id="pTitle"
+                placeholder="เช่น ระบบ Egg"
+            >
 
 
-<label>
-ราคา
-</label>
+            <label>
+                รายละเอียดสินค้า
+            </label>
 
-<input
-id="pPrice"
-type="number"
-placeholder="ราคา"
->
-
-</div>
+            <textarea
+                id="pDesc"
+                placeholder="รายละเอียดสินค้า"
+            ></textarea>
 
 
-<div>
+            <label>
+                หมวดหมู่
+            </label>
 
-<label>
-รูปสินค้า URL
-</label>
-
-<input
-id="pImage"
-placeholder="https://..."
->
+            <input
+                id="pCategory"
+                placeholder="เช่น UI / Script / Model"
+            >
 
 
-<label>
-วิดีโอสินค้า URL
-</label>
+            <label>
+                ราคา
+            </label>
 
-<input
-id="pVideo"
-placeholder="https://..."
->
+            <input
+                id="pPrice"
+                type="number"
+                min="0"
+                placeholder="ราคาเป็นบาท"
+            >
 
-
-<label>
-โมเดล 3D / GLB URL
-</label>
-
-<input
-id="pModel"
-placeholder="https://..."
->
+        </div>
 
 
-<label>
-LINE
-</label>
 
-<input
-id="pLine"
-placeholder="ลิงก์ LINE"
->
+        <!-- RIGHT -->
 
+        <div>
 
-<label>
-Facebook
-</label>
+            <label>
+                🖼️ รูปสินค้า
+            </label>
 
-<input
-id="pFacebook"
-placeholder="ลิงก์ Facebook"
->
+            <input
+                id="pImageFile"
+                type="file"
+                accept="image/*"
+            >
 
+            <img
+                id="pImagePreview"
+                class="preview"
+            >
 
-<label>
-Discord
-</label>
-
-<input
-id="pDiscord"
-placeholder="ลิงก์ Discord"
->
-
-</div>
-
-</div>
+            <div
+                id="pImageInfo"
+                class="file-info"
+            >
+                ยังไม่ได้เลือกไฟล์
+            </div>
 
 
-<button id="addProductBtn">
 
-เพิ่มสินค้า
+            <label>
+                🎬 วิดีโอสินค้า
+            </label>
 
-</button>
+            <input
+                id="pVideoFile"
+                type="file"
+                accept="video/*"
+            >
+
+            <div
+                id="pVideoInfo"
+                class="file-info"
+            >
+                ยังไม่ได้เลือกไฟล์
+            </div>
+
+
+
+            <label>
+                📦 โมเดล 3D
+                <span class="small">
+                    (.glb)
+                </span>
+            </label>
+
+            <input
+                id="pModelFile"
+                type="file"
+                accept=".glb,model/gltf-binary"
+            >
+
+            <div
+                id="pModelInfo"
+                class="file-info"
+            >
+                ยังไม่ได้เลือกไฟล์
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="grid">
+
+        <div>
+
+            <label>
+                LINE
+            </label>
+
+            <input
+                id="pLine"
+                placeholder="ลิงก์ LINE"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Facebook
+            </label>
+
+            <input
+                id="pFacebook"
+                placeholder="ลิงก์ Facebook"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Discord
+            </label>
+
+            <input
+                id="pDiscord"
+                placeholder="ลิงก์ Discord"
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <button
+        id="addProductBtn"
+    >
+        📤 อัปโหลดและเพิ่มสินค้า
+    </button>
+
+
+
+    <div
+        id="productProgressBox"
+        class="progress-box"
+    >
+
+        <div
+            id="productProgressText"
+            class="progress-text"
+        >
+            กำลังเตรียม...
+        </div>
+
+        <progress
+            id="productProgress"
+            value="0"
+            max="100"
+        ></progress>
+
+    </div>
 
 </section>
 
 
 
-<!-- =========================
-     ADD VIDEO
-========================= -->
+<!-- ==================================================
+     ADD CLIP
+================================================== -->
 
 <section class="card">
 
-<h2>
-🎬 เพิ่มคลิป
-</h2>
+    <div class="section-title">
 
-<p class="small">
-คลิปทุกประเภทไม่ต้องใส่ราคา
-</p>
+        <h2>
+            🎬 เพิ่มคลิป
+        </h2>
 
+        <span class="badge">
+            ไม่ต้องใส่ราคา
+        </span>
 
-<label>
-ประเภทคลิป
-</label>
-
-<select id="vCategory">
-
-<option value="คลิปโปรโมทสินค้า">
-คลิปโปรโมทสินค้า
-</option>
-
-<option value="สื่อการสอน">
-สื่อการสอน
-</option>
-
-<option value="คลิปทั่วไป">
-คลิปทั่วไป
-</option>
-
-</select>
+    </div>
 
 
-<div id="bindBox">
+    <label>
+        ประเภทคลิป
+    </label>
 
-<label>
-สินค้าที่โปรโมท
-</label>
+    <select id="vCategory">
 
-<select id="vProduct">
+        <option value="คลิปโปรโมทสินค้า">
+            คลิปโปรโมทสินค้า
+        </option>
 
-<option value="">
--- เลือกสินค้า --
-</option>
+        <option value="สื่อการสอน">
+            สื่อการสอน
+        </option>
 
-</select>
+        <option value="คลิปทั่วไป">
+            คลิปทั่วไป
+        </option>
 
-</div>
-
-
-<label>
-ชื่อคลิป
-</label>
-
-<input
-id="vTitle"
-placeholder="ชื่อคลิป"
->
+    </select>
 
 
-<label>
-รายละเอียด
-</label>
 
-<textarea
-id="vDesc"
-placeholder="รายละเอียดคลิป">
-</textarea>
+    <div id="bindBox">
 
+        <label>
+            🛍️ สินค้าที่โปรโมท
+        </label>
 
-<label>
-วิดีโอ URL
-</label>
+        <select id="vProduct">
 
-<input
-id="vUrl"
-placeholder="https://..."
->
+            <option value="">
+                -- เลือกสินค้า --
+            </option>
+
+        </select>
+
+    </div>
 
 
-<label>
-รูปปก URL
-</label>
 
-<input
-id="vCover"
-placeholder="https://..."
->
+    <label>
+        ชื่อคลิป
+        <span class="file-required">*</span>
+    </label>
+
+    <input
+        id="vTitle"
+        placeholder="ชื่อคลิป"
+    >
 
 
-<button id="addVideoBtn">
 
-เพิ่มคลิป
+    <label>
+        รายละเอียดคลิป
+    </label>
 
-</button>
+    <textarea
+        id="vDesc"
+        placeholder="รายละเอียดคลิป"
+    ></textarea>
+
+
+
+    <div class="grid">
+
+        <div>
+
+            <label>
+                🎞️ เลือกวิดีโอจากเครื่อง
+                <span class="file-required">*</span>
+            </label>
+
+            <input
+                id="vVideoFile"
+                type="file"
+                accept="video/*"
+            >
+
+            <div
+                id="vVideoInfo"
+                class="file-info"
+            >
+                ยังไม่ได้เลือกไฟล์
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <label>
+                🖼️ รูปปกคลิป
+            </label>
+
+            <input
+                id="vCoverFile"
+                type="file"
+                accept="image/*"
+            >
+
+            <img
+                id="vCoverPreview"
+                class="preview"
+            >
+
+            <div
+                id="vCoverInfo"
+                class="file-info"
+            >
+                ไม่ใส่ก็ได้
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <button
+        id="addVideoBtn"
+    >
+        📤 อัปโหลดและเพิ่มคลิป
+    </button>
+
+
+
+    <div
+        id="videoProgressBox"
+        class="progress-box"
+    >
+
+        <div
+            id="videoProgressText"
+            class="progress-text"
+        >
+            กำลังเตรียม...
+        </div>
+
+        <progress
+            id="videoProgress"
+            value="0"
+            max="100"
+        ></progress>
+
+    </div>
 
 </section>
 
 
 
-<!-- =========================
+<!-- ==================================================
      PRODUCTS
-========================= -->
+================================================== -->
 
 <section
-class="card"
-id="products"
+    class="card"
+    id="products"
 >
 
-<h2>
-📦 สินค้า
-</h2>
+    <div class="section-title">
 
-<div id="productList">
+        <h2>
+            📦 สินค้า
+        </h2>
 
-กำลังโหลด...
+    </div>
 
-</div>
+    <div id="productList">
+
+        <div class="empty">
+            กำลังโหลด...
+        </div>
+
+    </div>
 
 </section>
 
 
 
-<!-- =========================
-     VIDEOS
-========================= -->
+<!-- ==================================================
+     CLIPS
+================================================== -->
 
 <section
-class="card"
-id="videos"
+    class="card"
+    id="videos"
 >
 
-<h2>
-🎞️ คลิปทั้งหมด
-</h2>
+    <div class="section-title">
 
-<div id="videoList">
+        <h2>
+            🎞️ คลิปทั้งหมด
+        </h2>
 
-กำลังโหลด...
+    </div>
 
-</div>
+    <div id="videoList">
+
+        <div class="empty">
+            กำลังโหลด...
+        </div>
+
+    </div>
 
 </section>
 
 
 
-<!-- =========================
+<!-- ==================================================
      ACCESS REQUESTS
-========================= -->
+================================================== -->
 
 <section class="card">
 
-<h2>
-👥 คำขอเข้าเรียน
-</h2>
+    <div class="section-title">
 
-<div id="requestList">
+        <h2>
+            👥 คำขอเข้าเรียน
+        </h2>
 
-กำลังโหลด...
+    </div>
 
-</div>
+    <div id="requestList">
+
+        <div class="empty">
+            กำลังโหลด...
+        </div>
+
+    </div>
 
 </section>
+
 
 </div>
 
@@ -625,54 +940,72 @@ id="videos"
 
 <script type="module">
 
+/* ==================================================
+   FIREBASE IMPORT
+================================================== */
+
 import {
-initializeApp
+    initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 
 
 import {
-getAuth,
-GoogleAuthProvider,
-signInWithPopup,
-onAuthStateChanged,
-signOut
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    onAuthStateChanged,
+    signOut
 }
 from
 "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
 
 import {
-getFirestore,
-collection,
-addDoc,
-doc,
-updateDoc,
-deleteDoc,
-onSnapshot,
-query,
-orderBy,
-serverTimestamp
+    getFirestore,
+    collection,
+    addDoc,
+    doc,
+    updateDoc,
+    deleteDoc,
+    onSnapshot,
+    query,
+    orderBy,
+    serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 
 import {
-firebaseConfig,
-ADMIN_EMAIL
+    getStorage,
+    ref,
+    uploadBytesResumable,
+    getDownloadURL,
+    deleteObject
 }
-from "./firebase-config.js";
+from
+"https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+
+
+import {
+    firebaseConfig,
+    ADMIN_EMAIL
+}
+from
+"./firebase-config.js";
 
 
 
-/* =========================
-   FIREBASE
-========================= */
+/* ==================================================
+   INITIALIZE
+================================================== */
 
 const app =
-initializeApp(firebaseConfig);
+initializeApp(
+    firebaseConfig
+);
 
 
 const auth =
@@ -683,14 +1016,18 @@ const db =
 getFirestore(app);
 
 
+const storage =
+getStorage(app);
+
+
 const provider =
 new GoogleAuthProvider();
 
 
 
-/* =========================
+/* ==================================================
    HELPER
-========================= */
+================================================== */
 
 const $ =
 id =>
@@ -698,18 +1035,18 @@ document.getElementById(id);
 
 
 const esc =
-s =>
-String(s ?? "")
+text =>
+String(text ?? "")
 .replace(
-/[&<>"']/g,
-c =>
-({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[c])
+    /[&<>"']/g,
+    char =>
+    ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+    }[char])
 );
 
 
@@ -718,1477 +1055,304 @@ let products = [];
 
 let notices = [];
 
+let clips = [];
+
 let noticeUnsub = null;
 
 
 
-/* =========================
-   TIME
-========================= */
+/* ==================================================
+   FORMAT FILE SIZE
+================================================== */
 
-function formatTime(timestamp){
+function fileSize(bytes){
 
-if(
-!timestamp ||
-!timestamp.toDate
+    if(bytes < 1024){
+
+        return bytes + " B";
+
+    }
+
+    if(bytes < 1024 * 1024){
+
+        return (
+            bytes / 1024
+        ).toFixed(1)
+        + " KB";
+
+    }
+
+    if(bytes < 1024 * 1024 * 1024){
+
+        return (
+            bytes /
+            (1024 * 1024)
+        ).toFixed(1)
+        + " MB";
+
+    }
+
+    return (
+        bytes /
+        (1024 * 1024 * 1024)
+    ).toFixed(2)
+    + " GB";
+
+}
+
+
+
+/* ==================================================
+   SAFE FILE NAME
+================================================== */
+
+function safeFileName(
+    name
 ){
 
-return "เมื่อสักครู่";
-
-}
-
-return timestamp
-.toDate()
-.toLocaleString(
-"th-TH",
-{
-dateStyle:"short",
-timeStyle:"short"
-}
-);
+    return name
+        .replace(
+            /[^a-zA-Z0-9ก-๙._-]/g,
+            "_"
+        );
 
 }
 
 
 
-/* =========================
-   CREATE NOTIFICATION
-========================= */
+/* ==================================================
+   UPLOAD FILE
+================================================== */
+
+function uploadFile(
+    file,
+    path,
+    progressElement,
+    progressText,
+    label
+){
+
+    return new Promise(
+        (resolve,reject)=>{
+
+            const storageRef =
+            ref(
+                storage,
+                path
+            );
+
+
+            const uploadTask =
+            uploadBytesResumable(
+                storageRef,
+                file
+            );
+
+
+            uploadTask.on(
+
+                "state_changed",
+
+                snapshot => {
+
+                    const percent =
+                    Math.round(
+                        (
+                            snapshot.bytesTransferred /
+                            snapshot.totalBytes
+                        ) * 100
+                    );
+
+
+                    progressElement.value =
+                    percent;
+
+
+                    progressText.textContent =
+                    label +
+                    " "
+                    +
+                    percent
+                    +
+                    "%";
+
+                },
+
+                error => {
+
+                    reject(error);
+
+                },
+
+                async () => {
+
+                    try{
+
+                        const url =
+                        await getDownloadURL(
+                            uploadTask.snapshot.ref
+                        );
+
+
+                        resolve({
+                            url:url,
+                            path:path
+                        });
+
+                    }
+
+                    catch(error){
+
+                        reject(error);
+
+                    }
+
+                }
+
+            );
+
+        }
+    );
+
+}
+
+
+
+/* ==================================================
+   NOTIFICATION
+================================================== */
 
 async function createNotification(
-title,
-detail,
-page
+    title,
+    detail,
+    page
 ){
 
-await addDoc(
-collection(
-db,
-"notifications"
-),
-{
+    await addDoc(
+        collection(
+            db,
+            "notifications"
+        ),
+        {
 
-title:title,
+            title:title,
 
-detail:detail,
+            detail:detail,
 
-page:page,
+            page:page,
 
-read:false,
+            read:false,
 
-createdBy:
-auth.currentUser?.email || "",
+            createdBy:
+            auth.currentUser?.email || "",
 
-createdAt:
-serverTimestamp()
+            createdAt:
+            serverTimestamp()
 
-}
-
-);
-
-
+        }
+    );
 
 }
 
 
 
-/* =========================
-   LOAD NOTIFICATIONS
-========================= */
+/* ==================================================
+   TIME
+================================================== */
+
+function formatTime(
+    timestamp
+){
+
+    if(
+        !timestamp ||
+        !timestamp.toDate
+    ){
+
+        return "เมื่อสักครู่";
+
+    }
+
+
+    return timestamp
+        .toDate()
+        .toLocaleString(
+            "th-TH",
+            {
+                dateStyle:"short",
+                timeStyle:"short"
+            }
+        );
+
+}
+
+
+
+/* ==================================================
+   NOTIFICATION LIST
+================================================== */
 
 function listenNotifications(){
 
-if(noticeUnsub){
+    if(noticeUnsub){
 
-noticeUnsub();
+        noticeUnsub();
+
+    }
+
+
+    const q =
+    query(
+        collection(
+            db,
+            "notifications"
+        ),
+        orderBy(
+            "createdAt",
+            "desc"
+        )
+    );
+
+
+    noticeUnsub =
+    onSnapshot(
+        q,
+        snapshot => {
+
+            notices =
+            snapshot.docs
+            .map(
+                d => ({
+                    id:d.id,
+                    ...d.data()
+                })
+            )
+            .slice(
+                0,
+                50
+            );
+
+
+            renderNotifications();
+
+        }
+    );
 
 }
 
 
-const q =
-query(
-collection(db,"notifications"),
-orderBy(
-"createdAt",
-"desc"
-)
-);
 
-
-noticeUnsub =
-onSnapshot(
-q,
-snapshot => {
-
-notices =
-snapshot.docs
-.map(
-d => ({
-id:d.id,
-...d.data()
-})
-)
-.slice(0,50);
-
-
-renderNotifications();
-
-}
-);
-
-}
-
-
-
-/* =========================
+/* ==================================================
    RENDER NOTIFICATIONS
-========================= */
+================================================== */
 
 function renderNotifications(){
 
-const box =
-$("noticeList");
+    const box =
+    $("noticeList");
 
 
-if(!notices.length){
+    if(!notices.length){
 
-box.innerHTML =
-`
-<div class="small">
-ยังไม่มีแจ้งเตือน
-</div>
-`;
-
-}
-else{
-
-box.innerHTML =
-notices
-.map(
-n => `
-
-<div
-class="notice
-${n.read ? "" : "noticeUnread"}"
->
-
-<b>
-${esc(n.title)}
-</b>
-
-<div style="margin-top:5px">
-${esc(n.detail)}
-</div>
-
-<div class="noticeMeta">
-
-📍 หน้า:
-${esc(n.page)}
-
-<br>
-
-🕐
-${formatTime(n.createdAt)}
-
-</div>
-
-
-<button
-class="openNotice"
-data-id="${n.id}"
-style="
-margin-top:8px;
-padding:7px 10px;
-"
->
-
-เปิดหน้า
-
-</button>
-
-
-</div>
-
-`
-)
-.join("");
-
-}
-
-
-
-const unread =
-notices.filter(
-n => !n.read
-).length;
-
-
-const count =
-$("noticeCount");
-
-
-count.textContent =
-unread;
-
-
-count.style.display =
-unread
-? "inline-flex"
-: "none";
-
-}
-
-
-
-/* =========================
-   NOTICE BUTTON
-========================= */
-
-$("noticeBtn").onclick =
-() => {
-
-const panel =
-$("noticePanel");
-
-
-panel.style.display =
-panel.style.display === "block"
-? "none"
-: "block";
-
-};
-
-
-
-/* =========================
-   READ ALL
-========================= */
-
-$("readAllBtn").onclick =
-async () => {
-
-const unread =
-notices.filter(
-n => !n.read
-);
-
-
-for(
-const n of unread
-){
-
-await updateDoc(
-doc(
-db,
-"notifications",
-n.id
-),
-{
-read:true
-}
-);
-
-}
-
-};
-
-
-
-/* =========================
-   OPEN NOTICE
-========================= */
-
-$("noticeList").onclick =
-async e => {
-
-if(
-!e.target.classList
-.contains("openNotice")
-){
-
-return;
-
-}
-
-
-const id =
-e.target.dataset.id;
-
-
-const n =
-notices.find(
-x => x.id === id
-);
-
-
-if(!n){
-
-return;
-
-}
-
-
-if(!n.read){
-
-await updateDoc(
-doc(
-db,
-"notifications",
-n.id
-),
-{
-read:true
-}
-);
-
-}
-
-
-$("noticePanel").style.display =
-"none";
-
-
-if(
-n.page === "สินค้า"
-){
-
-location.hash =
-"#products";
-
-}
-
-
-else if(
-n.page === "คลิปโปรโมทสินค้า"
-){
-
-location.hash =
-"#videos";
-
-}
-
-
-else if(
-n.page === "สื่อการสอน"
-){
-
-location.hash =
-"#videos";
-
-}
-
-
-else if(
-n.page === "คลิปทั่วไป"
-){
-
-location.hash =
-"#videos";
-
-}
-
-};
-
-
-
-/* =========================
-   LOGIN
-========================= */
-
-$("loginBtn").onclick =
-async () => {
-
-try{
-
-const result =
-await signInWithPopup(
-auth,
-provider
-);
-
-
-if(
-result.user.email !==
-ADMIN_EMAIL
-){
-
-await signOut(auth);
-
-$("loginMsg").textContent =
-"บัญชีนี้ไม่มีสิทธิ์แอดมิน";
-
-}
-
-}
-
-catch(error){
-
-$("loginMsg").textContent =
-"เข้าสู่ระบบไม่สำเร็จ: "
-+
-error.message;
-
-}
-
-};
-
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-$("logoutBtn").onclick =
-() =>
-signOut(auth);
-
-
-
-/* =========================
-   AUTH
-========================= */
-
-onAuthStateChanged(
-auth,
-user => {
-
-if(!user){
-
-$("loginBox").style.display =
-"block";
-
-$("app").style.display =
-"none";
-
-return;
-
-}
-
-
-if(
-user.email !== ADMIN_EMAIL
-){
-
-signOut(auth);
-
-return;
-
-}
-
-
-$("loginBox").style.display =
-"none";
-
-
-$("app").style.display =
-"block";
-
-
-$("adminEmail").textContent =
-user.email;
-
-
-listenNotifications();
-
-loadProducts();
-
-loadClips();
-
-loadRequests();
-
-}
-);
-
-
-
-/* =========================
-   VIDEO CATEGORY
-========================= */
-
-$("vCategory").onchange =
-() => {
-
-$("bindBox").style.display =
-$("vCategory").value ===
-"คลิปโปรโมทสินค้า"
-? "block"
-: "none";
-
-};
-
-
-
-/* =========================
-   ADD PRODUCT
-========================= */
-
-$("addProductBtn").onclick =
-async () => {
-
-const title =
-$("pTitle").value.trim();
-
-
-if(!title){
-
-alert(
-"กรุณาใส่ชื่อสินค้า"
-);
-
-return;
-
-}
-
-
-try{
-
-$("addProductBtn").disabled =
-true;
-
-
-await addDoc(
-collection(db,"products"),
-{
-
-title:title,
-
-description:
-$("pDesc").value.trim(),
-
-category:
-$("pCategory").value.trim(),
-
-price:
-Number(
-$("pPrice").value
-) || 0,
-
-image:
-$("pImage").value.trim(),
-
-video:
-$("pVideo").value.trim(),
-
-model3d:
-$("pModel").value.trim(),
-
-line:
-$("pLine").value.trim(),
-
-facebook:
-$("pFacebook").value.trim(),
-
-discord:
-$("pDiscord").value.trim(),
-
-createdAt:
-serverTimestamp()
-
-}
-);
-
-
-
-/*
-สร้างแจ้งเตือน
-*/
-
-await createNotification(
-"🛍️ เพิ่มสินค้าใหม่",
-title,
-"สินค้า"
-);
-
-
-
-alert(
-"เพิ่มสินค้าแล้ว\n🔔 สร้างแจ้งเตือนแล้ว"
-);
-
-
-
-[
-"pTitle",
-"pDesc",
-"pCategory",
-"pPrice",
-"pImage",
-"pVideo",
-"pModel",
-"pLine",
-"pFacebook",
-"pDiscord"
-]
-.forEach(
-id => $(id).value = ""
-);
-
-
-}
-
-catch(error){
-
-alert(
-"เพิ่มสินค้าไม่สำเร็จ: "
-+
-error.message
-);
-
-}
-
-finally{
-
-$("addProductBtn").disabled =
-false;
-
-}
-
-};
-
-
-
-/* =========================
-   ADD VIDEO
-========================= */
-
-$("addVideoBtn").onclick =
-async () => {
-
-const title =
-$("vTitle").value.trim();
-
-
-if(!title){
-
-alert(
-"กรุณาใส่ชื่อคลิป"
-);
-
-return;
-
-}
-
-
-const category =
-$("vCategory").value;
-
-
-const productId =
-$("vProduct").value;
-
-
-const product =
-products.find(
-p => p.id === productId
-);
-
-
-
-let collectionName;
-
-
-if(
-category ===
-"คลิปโปรโมทสินค้า"
-){
-
-collectionName =
-"productVideos";
-
-}
-
-else if(
-category ===
-"สื่อการสอน"
-){
-
-collectionName =
-"videos";
-
-}
-
-else{
-
-collectionName =
-"generalVideos";
-
-}
-
-
-
-try{
-
-$("addVideoBtn").disabled =
-true;
-
-
-await addDoc(
-collection(
-db,
-collectionName
-),
-{
-
-title:title,
-
-description:
-$("vDesc").value.trim(),
-
-category:category,
-
-url:
-$("vUrl").value.trim(),
-
-video:
-$("vUrl").value.trim(),
-
-cover:
-$("vCover").value.trim(),
-
-productId:
-productId || "",
-
-productTitle:
-product?.title || "",
-
-productPrice:
-product?.price || 0,
-
-createdAt:
-serverTimestamp()
-
-}
-);
-
-
-
-/*
-สร้างแจ้งเตือน
-*/
-
-await createNotification(
-"🎬 เพิ่มคลิปใหม่",
-title,
-category
-);
-
-
-
-alert(
-"เพิ่มคลิปแล้ว\n🔔 สร้างแจ้งเตือนแล้ว"
-);
-
-
-
-[
-"vTitle",
-"vDesc",
-"vUrl",
-"vCover"
-]
-.forEach(
-id => $(id).value = ""
-);
-
-
-$("vProduct").value =
-"";
-
-}
-
-catch(error){
-
-alert(
-"เพิ่มคลิปไม่สำเร็จ: "
-+
-error.message
-);
-
-}
-
-finally{
-
-$("addVideoBtn").disabled =
-false;
-
-}
-
-};
-
-
-
-/* =========================
-   LOAD PRODUCTS
-========================= */
-
-function loadProducts(){
-
-onSnapshot(
-
-query(
-collection(db,"products"),
-orderBy(
-"createdAt",
-"desc"
-)
-),
-
-snapshot => {
-
-products =
-snapshot.docs.map(
-d => ({
-id:d.id,
-...d.data()
-})
-);
-
-
-
-$("productList").innerHTML =
-products.length
-
-?
-
-products.map(
-p => `
-
-<div class="item">
-
-<span class="badge">
-
-${esc(
-p.category ||
-"ไม่มีหมวด"
-)}
-
-</span>
-
-
-<h3>
-${esc(p.title)}
-</h3>
-
-
-<div class="small">
-
-${esc(
-p.description
-)}
-
-</div>
-
-
-<div style="
-margin-top:7px;
-">
-
-ราคา:
-${Number(
-p.price || 0
-).toLocaleString()}
-บาท
-
-</div>
-
-
-<button
-class="danger delProduct"
-data-id="${p.id}"
-style="margin-top:8px"
->
-
-ลบสินค้า
-
-</button>
-
-
-</div>
-
-`
-)
-.join("")
-
-:
-
-`
-<div class="small">
-ยังไม่มีสินค้า
-</div>
-`;
-
-
-
-$("vProduct").innerHTML =
-`
-<option value="">
--- เลือกสินค้า --
-</option>
-`
-+
-products
-.map(
-p => `
-
-<option value="${p.id}">
-
-${esc(p.title)}
-
-</option>
-
-`
-)
-.join("");
-
-}
-
-);
-
-}
-
-
-
-/* =========================
-   DELETE PRODUCT
-========================= */
-
-$("productList").onclick =
-async e => {
-
-if(
-!e.target.classList
-.contains("delProduct")
-){
-
-return;
-
-}
-
-
-const id =
-e.target.dataset.id;
-
-
-if(
-!confirm(
-"ต้องการลบสินค้านี้หรือไม่?"
-)
-){
-
-return;
-
-}
-
-
-try{
-
-await deleteDoc(
-doc(
-db,
-"products",
-id
-)
-);
-
-alert("ลบสินค้าแล้ว");
-
-}
-
-catch(error){
-
-alert(
-"ลบสินค้าไม่สำเร็จ: "
-+
-error.message
-);
-
-}
-
-};
-
-
-
-/* =========================
-   LOAD CLIPS
-========================= */
-
-let clips = [];
-
-
-function loadClips(){
-
-const collections = [
-"productVideos",
-"videos",
-"generalVideos"
-];
-
-
-collections.forEach(
-collectionName => {
-
-onSnapshot(
-
-query(
-collection(
-db,
-collectionName
-),
-orderBy(
-"createdAt",
-"desc"
-)
-),
-
-snapshot => {
-
-
-clips =
-clips.filter(
-x =>
-x.collectionName !==
-collectionName
-);
-
-
-snapshot.docs.forEach(
-d => {
-
-clips.push({
-
-id:d.id,
-
-collectionName:
-collectionName,
-
-...d.data()
-
-});
-
-});
-
-
-clips.sort(
-(a,b) =>
-(b.createdAt?.seconds || 0)
--
-(a.createdAt?.seconds || 0)
-);
-
-
-
-$("videoList").innerHTML =
-clips.length
-
-?
-
-clips.map(
-v => `
-
-<div class="item">
-
-<span class="badge">
-
-${esc(
-v.category ||
-"คลิป"
-)}
-
-</span>
-
-
-<h3>
-
-${esc(v.title)}
-
-</h3>
-
-
-<div class="small">
-
-${esc(
-v.description
-)}
-
-</div>
-
-
-${
-v.productTitle
-
-?
-
-`
-<div class="small"
-style="margin-top:5px">
-
-🛍️ สินค้า:
-${esc(
-v.productTitle
-)}
-
-</div>
-`
-
-: ""
-
-}
-
-
-<button
-class="danger delClip"
-data-id="${v.id}"
-data-col="${v.collectionName}"
-style="margin-top:8px"
->
-
-ลบคลิป
-
-</button>
-
-
-</div>
-
-`
-)
-.join("")
-
-:
-
-`
-<div class="small">
-ยังไม่มีคลิป
-</div>
-`;
-
-}
-
-);
-
-});
-
-}
-
-
-
-/* =========================
-   DELETE CLIP
-========================= */
-
-$("videoList").onclick =
-async e => {
-
-if(
-!e.target.classList
-.contains("delClip")
-){
-
-return;
-
-}
-
-
-const id =
-e.target.dataset.id;
-
-
-const collectionName =
-e.target.dataset.col;
-
-
-if(
-!confirm(
-"ต้องการลบคลิปนี้หรือไม่?"
-)
-){
-
-return;
-
-}
-
-
-try{
-
-await deleteDoc(
-doc(
-db,
-collectionName,
-id
-)
-);
-
-alert("ลบคลิปแล้ว");
-
-}
-
-catch(error){
-
-alert(
-"ลบคลิปไม่สำเร็จ: "
-+
-error.message
-);
-
-}
-
-};
-
-
-
-/* =========================
-   LOAD REQUESTS
-========================= */
-
-function loadRequests(){
-
-onSnapshot(
-
-query(
-collection(db,"accessRequests"),
-orderBy(
-"createdAt",
-"desc"
-)
-),
-
-snapshot => {
-
-
-const rows =
-snapshot.docs.map(
-d => ({
-id:d.id,
-...d.data()
-})
-);
-
-
-
-$("requestList").innerHTML =
-rows.length
-
-?
-
-rows.map(
-r => `
-
-<div class="item">
-
-<h3>
-
-${esc(
-r.email ||
-"ไม่ทราบ Gmail"
-)}
-
-</h3>
-
-
-<div class="small">
-
-สถานะ:
-<b>
-${esc(
-r.status ||
-"pending"
-)}
-</b>
-
-</div>
-
-
-<div style="
-margin-top:10px;
-display:flex;
-gap:7px;
-flex-wrap:wrap;
-">
-
-
-<button
-class="success approve"
-data-id="${r.id}"
->
-
-อนุมัติ
-
-</button>
-
-
-<button
-class="warning deny"
-data-id="${r.id}"
->
-
-ปฏิเสธ
-
-</button>
-
-
-${
-r.status === "approved"
-
-?
-
-`
-<button
-class="danger revoke"
-data-id="${r.id}"
->
-
-🚫 ยกเลิกสิทธิ์
-
-</button>
-`
-
-: ""
-
-}
-
-
-</div>
-
-</div>
-
-`
-)
-.join("")
-
-:
-
-`
-<div class="small">
-ไม่มีคำขอ
-</div>
-`;
-
-}
-
-);
-
-}
-
-
-
-/* =========================
-   REQUEST ACTIONS
-========================= */
-
-$("requestList").onclick =
-async e => {
-
-const id =
-e.target.dataset.id;
-
-
-if(!id){
-
-return;
-
-}
-
-
-try{
-
-
-if(
-e.target.classList
-.contains("approve")
-){
-
-await updateDoc(
-
-doc(
-db,
-"accessRequests",
-id
-),
-
-{
-status:"approved"
-}
-
-);
-
-
-alert(
-"อนุมัติแล้ว"
-);
-
-}
-
-
-
-if(
-e.target.classList
-.contains("deny")
-){
-
-await updateDoc(
-
-doc(
-db,
-"accessRequests",
-id
-),
-
-{
-status:"denied"
-}
-
-);
-
-
-alert(
-"ปฏิเสธแล้ว"
-);
-
-}
-
-
-
-if(
-e.target.classList
-.contains("revoke")
-){
-
-await updateDoc(
-
-doc(
-db,
-"accessRequests",
-id
-),
-
-{
-status:"denied"
-}
-
-);
-
-
-alert(
-"ยกเลิกสิทธิ์แล้ว"
-);
-
-}
-
-
-}
-
-catch(error){
-
-alert(
-"ดำเนินการไม่สำเร็จ: "
-+
-error.message
-);
-
-}
-
-};
-
-</script>
-
-</body>
-     </html>
+        box.innerHTML =
+    
