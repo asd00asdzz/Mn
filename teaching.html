@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
 <title>สื่อการสอน | ROBLOX DEV</title>
 
 <style>
@@ -31,7 +30,6 @@ max-width:1200px;
 margin:auto;
 display:flex;
 gap:8px;
-align-items:center;
 flex-wrap:wrap;
 }
 
@@ -46,17 +44,6 @@ nav a:hover,
 nav a.active{
 background:#766cff;
 color:white;
-}
-
-#adminNav{
-display:none;
-margin-left:auto;
-}
-
-.admin-nav-btn{
-background:#766cff !important;
-color:white !important;
-font-weight:bold;
 }
 
 .hero{
@@ -164,6 +151,12 @@ font-weight:bold;
 margin-bottom:15px;
 }
 
+.user-info{
+color:#888;
+font-size:13px;
+margin-top:8px;
+}
+
 .grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -187,7 +180,6 @@ background:#05070b;
 width:100%;
 height:100%;
 display:block;
-object-fit:cover;
 }
 
 .body{
@@ -214,20 +206,15 @@ border-radius:8px;
 font-size:12px;
 }
 
-.user-info{
-color:#888;
-font-size:13px;
-margin-top:8px;
-}
-
 .error-box{
-max-width:600px;
-margin:30px auto;
-padding:20px;
-background:#211116;
-border:1px solid #71313c;
-border-radius:15px;
-color:#ff9da8;
+background:#2a1111;
+border:1px solid #6d2929;
+color:#ffaaaa;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
+font-size:13px;
+line-height:1.6;
 display:none;
 }
 
@@ -240,16 +227,6 @@ grid-template-columns:repeat(2,1fr);
 }
 
 @media(max-width:560px){
-
-nav{
-justify-content:center;
-}
-
-#adminNav{
-margin-left:0;
-width:100%;
-text-align:center;
-}
 
 .grid{
 grid-template-columns:1fr;
@@ -266,6 +243,7 @@ font-size:30px;
 
 <body>
 
+
 <header>
 
 <nav>
@@ -281,18 +259,6 @@ font-size:30px;
 <a href="shop.html">
 ร้านค้า
 </a>
-
-<div id="adminNav">
-
-<a
-href="admin.html"
-class="admin-nav-btn">
-
-⚙️ หลังบ้าน Admin
-
-</a>
-
-</div>
 
 </nav>
 
@@ -315,7 +281,9 @@ class="admin-nav-btn">
 <main class="container">
 
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
 <div
 id="loginBox"
@@ -330,7 +298,7 @@ class="auth-box">
 </h2>
 
 <p>
-กรุณาเข้าสู่ระบบด้วย Google
+เข้าสู่ระบบด้วย Google
 เพื่อเข้าใช้งานสื่อการสอน
 </p>
 
@@ -342,10 +310,17 @@ class="google-btn">
 
 </button>
 
+<div
+id="loginError"
+class="error-box">
+</div>
+
 </div>
 
 
-<!-- CHECKING -->
+<!-- =========================
+     CHECKING
+========================= -->
 
 <div
 id="checkingBox"
@@ -367,7 +342,9 @@ style="display:none;">
 </div>
 
 
-<!-- PENDING -->
+<!-- =========================
+     PENDING
+========================= -->
 
 <div
 id="pendingBox"
@@ -399,7 +376,9 @@ class="logout">
 </div>
 
 
-<!-- DENIED -->
+<!-- =========================
+     DENIED
+========================= -->
 
 <div
 id="deniedBox"
@@ -416,7 +395,6 @@ style="display:none;">
 
 <p>
 บัญชีของคุณยังไม่ได้รับอนุญาต
-<br>
 ให้เข้าใช้งานสื่อการสอน
 </p>
 
@@ -431,20 +409,12 @@ class="logout">
 </div>
 
 
-<!-- ERROR -->
+<!-- =========================
+     TEACHING
+========================= -->
 
-<div
-id="errorBox"
-class="error-box">
-
-<div id="errorText"></div>
-
-</div>
-
-
-<!-- TEACHING -->
-
-<section id="teachingContent">
+<section
+id="teachingContent">
 
 <div style="margin-bottom:25px;">
 
@@ -512,7 +482,7 @@ class="grid">
 
 
 /* ==================================================
-   FIREBASE
+   FIREBASE APP
 ================================================== */
 
 import {
@@ -521,6 +491,10 @@ initializeApp
 from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
+
+/* ==================================================
+   FIREBASE AUTH
+================================================== */
 
 import {
 getAuth,
@@ -533,6 +507,10 @@ from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
 
+/* ==================================================
+   FIRESTORE
+================================================== */
+
 import {
 getFirestore,
 doc,
@@ -540,11 +518,16 @@ getDoc,
 setDoc,
 collection,
 getDocs,
+onSnapshot,
 serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
+
+/* ==================================================
+   CONFIG
+================================================== */
 
 import {
 firebaseConfig
@@ -554,7 +537,7 @@ from
 
 
 /* ==================================================
-   INITIALIZE
+   FIREBASE
 ================================================== */
 
 const app =
@@ -571,9 +554,7 @@ new GoogleAuthProvider();
 
 
 provider.setCustomParameters({
-
 prompt:"select_account"
-
 });
 
 
@@ -590,49 +571,69 @@ const ADMIN_EMAIL =
 ================================================== */
 
 const loginBox =
-document.getElementById("loginBox");
+document.getElementById(
+"loginBox"
+);
 
 const checkingBox =
-document.getElementById("checkingBox");
+document.getElementById(
+"checkingBox"
+);
 
 const pendingBox =
-document.getElementById("pendingBox");
+document.getElementById(
+"pendingBox"
+);
 
 const deniedBox =
-document.getElementById("deniedBox");
+document.getElementById(
+"deniedBox"
+);
 
 const teachingContent =
-document.getElementById("teachingContent");
+document.getElementById(
+"teachingContent"
+);
 
 const googleLogin =
-document.getElementById("googleLogin");
+document.getElementById(
+"googleLogin"
+);
+
+const loginError =
+document.getElementById(
+"loginError"
+);
 
 const checkingTitle =
-document.getElementById("checkingTitle");
+document.getElementById(
+"checkingTitle"
+);
 
 const checkingText =
-document.getElementById("checkingText");
+document.getElementById(
+"checkingText"
+);
 
 const videosBox =
-document.getElementById("videos");
+document.getElementById(
+"videos"
+);
 
 const adminBadge =
-document.getElementById("adminBadge");
+document.getElementById(
+"adminBadge"
+);
 
 const adminArea =
-document.getElementById("adminArea");
-
-const adminNav =
-document.getElementById("adminNav");
+document.getElementById(
+"adminArea"
+);
 
 const userInfo =
-document.getElementById("userInfo");
-
-const errorBox =
-document.getElementById("errorBox");
-
-const errorText =
-document.getElementById("errorText");
+document.getElementById(
+"userInfo"
+);
 
 
 /* ==================================================
@@ -662,38 +663,25 @@ adminBadge.style.display =
 adminArea.style.display =
 "none";
 
-errorBox.style.display =
-"none";
-
 }
 
 
 /* ==================================================
-   SHOW ERROR
+   SHOW LOGIN
 ================================================== */
 
-function showError(error){
+function showLogin(){
 
 hideAll();
 
-errorBox.style.display =
+loginBox.style.display =
 "block";
 
-errorText.innerHTML = `
+googleLogin.disabled =
+false;
 
-<strong>
-เกิดข้อผิดพลาด
-</strong>
-
-<br><br>
-
-${esc(error.code || "")}
-
-<br>
-
-${esc(error.message || "")}
-
-`;
+googleLogin.textContent =
+"🔐 เข้าสู่ระบบด้วย Google";
 
 }
 
@@ -725,14 +713,6 @@ adminBadge.style.display =
 adminArea.style.display =
 "block";
 
-adminNav.style.display =
-"block";
-
-}else{
-
-adminNav.style.display =
-"none";
-
 }
 
 loadVideos();
@@ -741,12 +721,15 @@ loadVideos();
 
 
 /* ==================================================
-   GOOGLE LOGIN
+   GOOGLE POPUP LOGIN
 ================================================== */
 
 googleLogin.addEventListener(
 "click",
 async()=>{
+
+loginError.style.display =
+"none";
 
 try{
 
@@ -764,22 +747,22 @@ provider
 );
 
 
-const user =
-result.user;
-
+if(
+result &&
+result.user
+){
 
 console.log(
-"GOOGLE LOGIN SUCCESS:",
-user.email
+"LOGIN SUCCESS:",
+result.user.email
 );
 
-
 /*
-   สำคัญ:
-   ไม่ต้องเปลี่ยนหน้าเองสำหรับ User
-   onAuthStateChanged จะทำงานต่อ
+onAuthStateChanged()
+จะทำงานต่อเอง
 */
 
+}
 
 }catch(error){
 
@@ -788,7 +771,6 @@ console.error(
 error
 );
 
-
 googleLogin.disabled =
 false;
 
@@ -796,45 +778,16 @@ googleLogin.textContent =
 "🔐 เข้าสู่ระบบด้วย Google";
 
 
-/*
-   ถ้าผู้ใช้ปิดหน้าต่าง Google
-*/
+loginError.style.display =
+"block";
 
-if(
-error.code ===
-"auth/popup-closed-by-user"
-){
-
-return;
-
-}
-
-
-/*
-   ถ้า Popup ถูกบล็อก
-*/
-
-if(
-error.code ===
-"auth/popup-blocked"
-){
-
-alert(
-"เบราว์เซอร์บล็อกหน้าต่าง Google\n\n"+
-"กรุณาอนุญาต Popup แล้วลองใหม่"
-);
-
-return;
-
-}
-
-
-alert(
-"เข้าสู่ระบบไม่สำเร็จ\n\n"+
-error.code+
-"\n"+
-error.message
-);
+loginError.innerHTML =
+"เข้าสู่ระบบไม่สำเร็จ<br><br>"+
+"<b>"+
+esc(error.code || "")
++
+"</b><br>"+
+esc(error.message || "");
 
 }
 
@@ -856,24 +809,12 @@ user
 
 
 /* ==================================================
-   NOT LOGIN
+   NO LOGIN
 ================================================== */
 
 if(!user){
 
-hideAll();
-
-loginBox.style.display =
-"block";
-
-adminNav.style.display =
-"none";
-
-googleLogin.disabled =
-false;
-
-googleLogin.textContent =
-"🔐 เข้าสู่ระบบด้วย Google";
+showLogin();
 
 return;
 
@@ -881,13 +822,14 @@ return;
 
 
 /* ==================================================
-   LOGIN SUCCESS
+   GET EMAIL
 ================================================== */
 
 const email =
-(user.email || "")
-.toLowerCase()
-.trim();
+(
+user.email || ""
+)
+.toLowerCase();
 
 
 console.log(
@@ -906,24 +848,12 @@ ADMIN_EMAIL.toLowerCase()
 ){
 
 console.log(
-"ADMIN DETECTED"
+"ADMIN LOGIN"
 );
 
-
-/*
-   แสดงเมนู Admin ก่อน
-*/
-
-adminNav.style.display =
-"block";
-
-
-/*
-   เข้า Admin โดยตรง
-*/
-
-window.location.replace(
-"admin.html"
+showTeaching(
+user,
+true
 );
 
 return;
@@ -932,11 +862,8 @@ return;
 
 
 /* ==================================================
-   USER NORMAL
+   NORMAL USER
 ================================================== */
-
-adminNav.style.display =
-"none";
 
 hideAll();
 
@@ -953,6 +880,7 @@ checkingText.textContent =
 
 
 try{
+
 
 const requestRef =
 doc(
@@ -977,7 +905,7 @@ if(
 ){
 
 console.log(
-"สร้างคำขอใหม่"
+"สร้างคำขออนุมัติ"
 );
 
 
@@ -1010,13 +938,18 @@ serverTimestamp()
 pendingBox.style.display =
 "block";
 
+
+watchAccessStatus(
+user.uid
+);
+
 return;
 
 }
 
 
 /* ==================================================
-   REQUEST DATA
+   EXISTING REQUEST
 ================================================== */
 
 const data =
@@ -1024,7 +957,126 @@ requestSnap.data();
 
 
 console.log(
-"ACCESS STATUS:",
+"STATUS:",
+data.status
+);
+
+
+/* APPROVED */
+
+if(
+data.status ===
+"approved"
+){
+
+showTeaching(
+user,
+false
+);
+
+watchAccessStatus(
+user.uid
+);
+
+return;
+
+}
+
+
+/* DENIED */
+
+if(
+data.status ===
+"denied"
+){
+
+deniedBox.style.display =
+"block";
+
+return;
+
+}
+
+
+/* PENDING */
+
+pendingBox.style.display =
+"block";
+
+watchAccessStatus(
+user.uid
+);
+
+}
+catch(error){
+
+console.error(
+"FIRESTORE ERROR:",
+error
+);
+
+checkingTitle.textContent =
+"เกิดข้อผิดพลาด";
+
+checkingText.innerHTML =
+"ไม่สามารถตรวจสอบคำขอได้<br><br>"+
+"<small>"+
+esc(error.code || "")+
+"<br>"+
+esc(error.message || "")+
+"</small>";
+
+}
+
+});
+
+
+/* ==================================================
+   REALTIME APPROVAL
+================================================== */
+
+const listeners = {};
+
+
+function watchAccessStatus(uid){
+
+if(
+listeners[uid]
+){
+
+return;
+
+}
+
+const requestRef =
+doc(
+db,
+"accessRequests",
+uid
+);
+
+
+listeners[uid] =
+onSnapshot(
+requestRef,
+
+snapshot=>{
+
+if(
+!snapshot.exists()
+){
+
+return;
+
+}
+
+
+const data =
+snapshot.data();
+
+
+console.log(
+"REALTIME STATUS:",
 data.status
 );
 
@@ -1039,7 +1091,7 @@ data.status ===
 ){
 
 showTeaching(
-user,
+auth.currentUser,
 false
 );
 
@@ -1057,30 +1109,75 @@ data.status ===
 "denied"
 ){
 
+hideAll();
+
 deniedBox.style.display =
 "block";
 
-return;
+}
+
+},
+
+error=>{
+
+console.error(
+"REALTIME ERROR:",
+error
+);
+
+});
 
 }
 
 
 /* ==================================================
-   PENDING
+   LOGOUT PENDING
 ================================================== */
 
-pendingBox.style.display =
-"block";
+document
+.getElementById(
+"logoutPending"
+)
+.addEventListener(
+"click",
+async()=>{
+
+try{
+
+await signOut(auth);
+
+location.reload();
+
+}catch(error){
+
+console.error(error);
 
 }
-catch(error){
 
-console.error(
-"FIRESTORE ERROR:",
-error
-);
+});
 
-showError(error);
+
+/* ==================================================
+   LOGOUT DENIED
+================================================== */
+
+document
+.getElementById(
+"logoutDenied"
+)
+.addEventListener(
+"click",
+async()=>{
+
+try{
+
+await signOut(auth);
+
+location.reload();
+
+}catch(error){
+
+console.error(error);
 
 }
 
@@ -1097,7 +1194,9 @@ false;
 
 async function loadVideos(){
 
-if(videosLoaded){
+if(
+videosLoaded
+){
 
 return;
 
@@ -1124,6 +1223,7 @@ padding:40px;
 
 
 try{
+
 
 const snapshot =
 await getDocs(
@@ -1161,11 +1261,12 @@ const text =
 title+
 " "+
 category
-).toLowerCase();
+)
+.toLowerCase();
 
 
 /*
-   ค้นหาวิดีโอการสอน
+   รองรับชื่อหมวดหมู่หลายแบบ
 */
 
 if(
@@ -1208,7 +1309,8 @@ b.createdAt?.seconds || 0;
 
 return bTime-aTime;
 
-});
+}
+);
 
 
 /* ==================================================
@@ -1293,21 +1395,16 @@ video.category ||
 </article>
 
 `
-).join("");
+)
+.join("");
 
 
-}
-catch(error){
+}catch(error){
 
 console.error(
-"LOAD VIDEO ERROR:",
+"VIDEO ERROR:",
 error
 );
-
-
-videosLoaded =
-false;
-
 
 videosBox.innerHTML = `
 
@@ -1342,59 +1439,7 @@ ${esc(error.message || "")}
 
 
 /* ==================================================
-   LOGOUT PENDING
-================================================== */
-
-document
-.getElementById("logoutPending")
-.addEventListener(
-"click",
-async()=>{
-
-try{
-
-await signOut(auth);
-
-location.reload();
-
-}
-catch(error){
-
-console.error(error);
-
-}
-
-});
-
-
-/* ==================================================
-   LOGOUT DENIED
-================================================== */
-
-document
-.getElementById("logoutDenied")
-.addEventListener(
-"click",
-async()=>{
-
-try{
-
-await signOut(auth);
-
-location.reload();
-
-}
-catch(error){
-
-console.error(error);
-
-}
-
-});
-
-
-/* ==================================================
-   ESCAPE HTML
+   ESCAPE
 ================================================== */
 
 function esc(value){
