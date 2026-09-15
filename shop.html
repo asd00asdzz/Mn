@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>ร้านค้า | ROBLOX DEV</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#070a11;
+color:white;
+}
+
+header{
+background:#101521;
+border-bottom:1px solid #272f40;
+padding:15px;
+}
+
+nav{
+max-width:1200px;
+margin:auto;
+display:flex;
+gap:8px;
+}
+
+nav a{
+color:#aaa;
+text-decoration:none;
+padding:10px 13px;
+border-radius:10px;
+}
+
+nav a:hover,
+nav a.active{
+background:#766cff;
+color:white;
+}
+
+.hero{
+text-align:center;
+padding:60px 20px;
+background:radial-gradient(circle,#302866,#070a11 65%);
+}
+
+.hero h1{
+font-size:38px;
+margin-bottom:10px;
+}
+
+.hero p{
+color:#aeb5c5;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:35px 20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.card{
+background:#111722;
+border:1px solid #272f40;
+border-radius:18px;
+overflow:hidden;
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+border-color:#766cff;
+}
+
+.image{
+aspect-ratio:16/9;
+background:#171d29;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:50px;
+}
+
+.image img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.body{
+padding:17px;
+}
+
+.body p{
+color:#9da6b7;
+font-size:14px;
+line-height:1.5;
+margin-top:8px;
+}
+
+.tag{
+display:inline-block;
+margin-top:12px;
+padding:5px 9px;
+background:#252044;
+color:#aaa3ff;
+border-radius:8px;
+font-size:12px;
+}
+
+.price{
+font-size:23px;
+color:#968fff;
+font-weight:bold;
+margin:13px 0;
+}
+
+.buttons{
+display:flex;
+gap:8px;
+}
+
+.buy,
+.view3d{
+flex:1;
+padding:12px;
+border:0;
+border-radius:10px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+.buy{
+background:#766cff;
+}
+
+.view3d{
+background:#252c3b;
+}
+
+.buy:hover,
+.view3d:hover{
+opacity:.85;
+}
+
+/* MODAL */
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.8);
+z-index:999;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.modal.show{
+display:flex;
+}
+
+.modal-box{
+width:100%;
+max-width:650px;
+max-height:90vh;
+overflow:auto;
+background:#101521;
+border:1px solid #30394c;
+border-radius:20px;
+padding:22px;
+position:relative;
+}
+
+.close{
+position:absolute;
+right:15px;
+top:12px;
+font-size:25px;
+cursor:pointer;
+color:#aaa;
+}
+
+.modal-title{
+font-size:24px;
+margin-bottom:10px;
+}
+
+.modal-description{
+color:#aeb5c5;
+line-height:1.6;
+margin-bottom:15px;
+}
+
+/* CONTACT */
+
+.contact-buttons{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:20px;
+}
+
+.contact-btn{
+border:0;
+border-radius:12px;
+padding:14px 8px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+.line{
+background:#06c755;
+}
+
+.facebook{
+background:#1877f2;
+}
+
+.discord{
+background:#5865f2;
+}
+
+/* 3D */
+
+.viewer{
+width:100%;
+height:450px;
+background:#080b12;
+border-radius:15px;
+overflow:hidden;
+margin-top:15px;
+position:relative;
+}
+
+model-viewer{
+width:100%;
+height:100%;
+background:#080b12;
+}
+
+.viewer-help{
+position:absolute;
+bottom:10px;
+left:10px;
+right:10px;
+text-align:center;
+background:rgba(0,0,0,.55);
+padding:8px;
+border-radius:8px;
+font-size:12px;
+color:#ccc;
+pointer-events:none;
+}
+
+.no-model{
+height:300px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#999;
+text-align:center;
+}
+
+@media(max-width:800px){
+
+.grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:560px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:30px;
+}
+
+.contact-buttons{
+grid-template-columns:1fr;
+}
+
+.buttons{
+flex-direction:column;
+}
+
+.viewer{
+height:350px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<nav>
+
+<a href="index.html">หน้าหลัก</a>
+
+<a href="teaching.html">สื่อการสอน</a>
+
+<a href="shop.html" class="active">ร้านค้า</a>
+
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<h1>🛒 ROBLOX SHOP</h1>
+
+<p>
+Script • Model • UI • System • 3D Model
+</p>
+
+</section>
+
+
+<main class="container">
+
+<div id="products" class="grid">
+
+<p>กำลังโหลดสินค้า...</p>
+
+</div>
+
+</main>
+
+
+<!-- รายละเอียดสินค้า -->
+
+<div id="detailModal" class="modal">
+
+<div class="modal-box">
+
+<div class="close" onclick="closeModal('detailModal')">×</div>
+
+<div id="detailContent"></div>
+
+</div>
+
+</div>
+
+
+<!-- ซื้อสินค้า -->
+
+<div id="buyModal" class="modal">
+
+<div class="modal-box">
+
+<div class="close" onclick="closeModal('buyModal')">×</div>
+
+<h2 class="modal-title">
+เลือกช่องทางติดต่อ
+</h2>
+
+<p id="buyName" class="modal-description"></p>
+
+<div class="contact-buttons">
+
+<button
+id="lineBtn"
+class="contact-btn line">
+LINE
+</button>
+
+<button
+id="facebookBtn"
+class="contact-btn facebook">
+Facebook
+</button>
+
+<button
+id="discordBtn"
+class="contact-btn discord">
+Discord
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 3D -->
+
+<div id="modelModal" class="modal">
+
+<div class="modal-box">
+
+<div class="close" onclick="closeModal('modelModal')">×</div>
+
+<h2 id="modelTitle" class="modal-title">
+ดูโมเดล 3D
+</h2>
+
+<div id="viewerArea"></div>
+
+</div>
+
+</div>
+
+<script
+type="module"
+src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+</script>
+
+
+<script type="module">
+
+import {
+initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+query,
+orderBy,
+onSnapshot
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+import {
+firebaseConfig
+}
+from "./firebase-config.js";
+
+
+const app=initializeApp(firebaseConfig);
+
+const db=getFirestore(app);
+
+
+let products=[];
+
+
+function esc(x){
+
+return String(x ?? "")
+.replace(/[&<>"']/g,c=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[c]));
+
+}
+
+
+const q=query(
+collection(db,"products"),
+orderBy("createdAt","desc")
+);
+
+
+onSnapshot(q,snapshot=>{
+
+products=snapshot.docs.map(doc=>({
+
+id:doc.id,
+...doc.data()
+
+}));
+
+renderProducts();
+
+});
+
+
+function renderProducts(){
+
+const box=document.getElementById("products");
+
+if(!products.length){
+
+box.innerHTML="<p>ยังไม่มีสินค้า</p>";
+
+return;
+
+}
+
+box.innerHTML=products.map((x,index)=>`
+
+<article class="card">
+
+<div class="image">
+
+${
+x.image
+?
+`<img src="${esc(x.image)}" alt="${esc(x.title)}">`
+:
+"🧩"
+}
+
+</div>
+
+<div class="body">
+
+<h3>${esc(x.title || "สินค้า")}</h3>
+
+<p>
+${esc(x.description || "ไม่มีรายละเอียด")}
+</p>
+
+<span class="tag">
+${esc(x.category || "สินค้า")}
+</span>
+
+<div class="price">
+฿${esc(x.price || 0)}
+</div>
+
+<div class="buttons">
+
+<button
+class="buy"
+onclick="buyProduct(${index})">
+
+🛒 สั่งซื้อ
+
+</button>
+
+${
+x.model3d
+?
+`<button
+class="view3d"
+onclick="viewModel(${index})">
+🧊 ดู 3D
+</button>`
+:
+""
+
+}
+
+</div>
+
+</div>
+
+</article>
+
+`).join("");
+
+}
+
+
+/* รายละเอียดสินค้า */
+
+window.openProduct=function(index){
+
+const x=products[index];
+
+if(!x)return;
+
+document.getElementById("detailContent").innerHTML=`
+
+<h2 class="modal-title">
+${esc(x.title || "สินค้า")}
+</h2>
+
+<div class="image" style="border-radius:12px;margin-bottom:15px;">
+
+${
+x.image
+?
+`<img src="${esc(x.image)}">`
+:
+"🧩"
+}
+
+</div>
+
+<p class="modal-description">
+
+${esc(x.description || "ไม่มีรายละเอียด")}
+
+</p>
+
+<div class="tag">
+
+${esc(x.category || "สินค้า")}
+
+</div>
+
+<div class="price">
+
+฿${esc(x.price || 0)}
+
+</div>
+
+<button
+class="buy"
+style="margin-top:10px"
+onclick="buyProduct(${index})">
+
+🛒 ซื้อสินค้า
+
+</button>
+
+${
+x.model3d
+?
+`<button
+class="view3d"
+style="width:100%;margin-top:8px"
+onclick="viewModel(${index})">
+
+🧊 ดูโมเดล 3D
+
+</button>`
+:
+""
+
+}
+
+`;
+
+document
+.getElementById("detailModal")
+.classList.add("show");
+
+};
+
+
+/* ซื้อ */
+
+window.buyProduct=function(index){
+
+const x=products[index];
+
+if(!x)return;
+
+document.getElementById("buyName").innerHTML=
+`คุณกำลังสั่งซื้อ <b>${esc(x.title || "สินค้า")}</b>`;
+
+const line=x.line || "";
+const facebook=x.facebook || "";
+const discord=x.discord || "";
+
+
+document.getElementById("lineBtn").onclick=()=>{
+
+if(line){
+
+window.open(line,"_blank");
+
+}else{
+
+alert("ยังไม่ได้ตั้งค่าลิงก์ LINE");
+
+}
+
+};
+
+
+document.getElementById("facebookBtn").onclick=()=>{
+
+if(facebook){
+
+window.open(facebook,"_blank");
+
+}else{
+
+alert("ยังไม่ได้ตั้งค่าลิงก์ Facebook");
+
+}
+
+};
+
+
+document.getElementById("discordBtn").onclick=()=>{
+
+if(discord){
+
+window.open(discord,"_blank");
+
+}else{
+
+alert("ยังไม่ได้ตั้งค่าลิงก์ Discord");
+
+}
+
+};
+
+
+document
+.getElementById("buyModal")
+.classList.add("show");
+
+};
+
+
+/* 3D */
+
+window.viewModel=function(index){
+
+const x=products[index];
+
+if(!x || !x.model3d){
+
+alert("สินค้านี้ยังไม่มีโมเดล 3D");
+
+return;
+
+}
+
+document.getElementById("modelTitle").textContent=
+"🧊 "+(x.title || "โมเดล 3D");
+
+
+document.getElementById("viewerArea").innerHTML=`
+
+<div class="viewer">
+
+<model-viewer
+src="${esc(x.model3d)}"
+camera-controls
+touch-action="pan-y"
+auto-rotate
+shadow-intensity="1"
+camera-orbit="0deg 75deg 2.5m"
+interaction-prompt="auto"
+ar>
+
+</model-viewer>
+
+<div class="viewer-help">
+
+ลากซ้าย/ขวา = หมุนโมเดล •
+ลากขึ้น/ลง = เปลี่ยนมุม •
+บีบนิ้ว/เลื่อนเมาส์ = ซูม
+
+</div>
+
+</div>
+
+`;
+
+document
+.getElementById("modelModal")
+.classList.add("show");
+
+};
+
+
+window.closeModal=function(id){
+
+document
+.getElementById(id)
+.classList.remove("show");
+
+};
+
+
+/* คลิกพื้นหลังเพื่อปิด */
+
+document.querySelectorAll(".modal").forEach(modal=>{
+
+modal.addEventListener("click",e=>{
+
+if(e.target===modal){
+
+modal.classList.remove("show");
+
+}
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
