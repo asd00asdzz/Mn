@@ -1,329 +1,357 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
-<title>Admin | Roblox Dev</title>
+<title>Admin | ROBLOX DEV</title>
 
 <style>
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#070a11;
-    color:#fff;
-    padding:20px;
-}
-
-.container{
-    max-width:1100px;
-    margin:auto;
+font-family:Arial,sans-serif;
+background:#070a11;
+color:white;
 }
 
 header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    margin-bottom:20px;
+background:#101521;
+border-bottom:1px solid #272f40;
+padding:18px;
 }
 
-h1{
-    font-size:25px;
+header h1{
+max-width:1200px;
+margin:auto;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:25px 20px;
+}
+
+.panel{
+background:#111722;
+border:1px solid #272f40;
+border-radius:18px;
+padding:22px;
+margin-bottom:25px;
 }
 
 h2{
-    margin-bottom:15px;
+margin-bottom:18px;
 }
 
 h3{
-    margin-bottom:8px;
+margin-top:20px;
+margin-bottom:10px;
 }
 
 label{
-    display:block;
-    font-size:14px;
-    color:#cbd5e1;
-}
-
-.card{
-    background:#0e1320;
-    border:1px solid #20283a;
-    border-radius:15px;
-    padding:18px;
-    margin-bottom:18px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(280px,1fr));
-    gap:15px;
+display:block;
+margin-top:13px;
+margin-bottom:6px;
+color:#cdd3df;
 }
 
 input,
 textarea,
 select{
-    width:100%;
-    padding:11px;
-    margin:7px 0 12px;
-    background:#101522;
-    color:#fff;
-    border:1px solid #273044;
-    border-radius:9px;
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #30394c;
+background:#080b12;
+color:white;
+outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+border-color:#766cff;
 }
 
 textarea{
-    min-height:90px;
-    resize:vertical;
+min-height:100px;
+resize:vertical;
 }
 
 input[type="file"]{
-    cursor:pointer;
-    padding:10px;
+padding:10px;
+background:#080b12;
 }
 
 button{
-    border:0;
-    border-radius:9px;
-    padding:10px 14px;
-    background:#5865f2;
-    color:#fff;
-    font-weight:bold;
-    cursor:pointer;
+border:0;
+border-radius:10px;
+padding:12px 16px;
+cursor:pointer;
+font-weight:bold;
+color:white;
 }
 
 button:hover{
-    opacity:.9;
+opacity:.85;
 }
 
 button:disabled{
-    opacity:.5;
-    cursor:not-allowed;
+opacity:.5;
+cursor:not-allowed;
+}
+
+.primary{
+background:#766cff;
 }
 
 .danger{
-    background:#dc3545;
+background:#e5484d;
 }
 
 .success{
-    background:#16a34a;
+background:#20a464;
 }
 
-.warning{
-    background:#d97706;
+.logout{
+background:#30394c;
 }
 
-.secondary{
-    background:#334155;
+.form-buttons{
+display:flex;
+gap:10px;
+margin-top:20px;
+flex-wrap:wrap;
 }
 
-.small{
-    font-size:13px;
-    color:#94a3b8;
+.status{
+padding:12px;
+background:#080b12;
+border-radius:10px;
+margin-bottom:15px;
+color:#aaa;
+line-height:1.6;
 }
 
-.item{
-    background:#111827;
-    border:1px solid #273044;
-    border-radius:12px;
-    padding:14px;
-    margin:10px 0;
+.hidden{
+display:none !important;
+}
+
+.login{
+max-width:450px;
+margin:100px auto;
+}
+
+/* PRODUCT */
+
+.product{
+display:flex;
+gap:15px;
+padding:15px;
+border:1px solid #272f40;
+border-radius:14px;
+margin-top:12px;
+background:#0c1018;
+}
+
+.product img{
+width:140px;
+height:90px;
+object-fit:cover;
+border-radius:8px;
+background:#171d29;
+}
+
+.product-info{
+flex:1;
+}
+
+.product-info h3{
+margin:0 0 7px;
+}
+
+.product-info p{
+color:#9da6b7;
+font-size:13px;
+margin-bottom:5px;
+}
+
+.actions{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+/* CLIP */
+
+.clip{
+display:flex;
+gap:15px;
+padding:15px;
+border:1px solid #272f40;
+border-radius:14px;
+margin-top:12px;
+background:#0c1018;
+}
+
+.clip-cover{
+width:160px;
+height:90px;
+object-fit:cover;
+border-radius:8px;
+background:#171d29;
+}
+
+.clip-info{
+flex:1;
+}
+
+.clip-info h3{
+margin:0 0 8px;
+}
+
+.clip-info p{
+color:#9da6b7;
+font-size:13px;
+margin-bottom:6px;
 }
 
 .badge{
-    display:inline-block;
-    background:#26324d;
-    padding:5px 8px;
-    border-radius:7px;
-    font-size:12px;
-    margin-bottom:8px;
+display:inline-block;
+padding:5px 9px;
+border-radius:7px;
+font-size:12px;
+background:#252044;
+color:#aaa3ff;
+margin-top:5px;
 }
 
-#app{
-    display:none;
+.badge.green{
+background:#123d2b;
+color:#72e6a5;
 }
 
-#loginBox{
-    max-width:420px;
-    margin:80px auto;
-    text-align:center;
+.badge.orange{
+background:#44301c;
+color:#ffc078;
+}
+
+/* UPLOAD BOX */
+
+.upload-box{
+background:#080b12;
+border:1px solid #272f40;
+border-radius:12px;
+padding:15px;
+margin-top:10px;
+}
+
+.upload-title{
+font-weight:bold;
+margin-bottom:8px;
+}
+
+.upload-help{
+color:#777;
+font-size:12px;
+line-height:1.5;
+margin-top:7px;
+}
+
+/* PROGRESS */
+
+.progress-box{
+display:none;
+margin-top:15px;
+}
+
+.progress-bar{
+width:100%;
+height:9px;
+background:#202635;
+border-radius:10px;
+overflow:hidden;
+}
+
+.progress-inner{
+width:0%;
+height:100%;
+background:#766cff;
+transition:.2s;
+}
+
+.progress-text{
+font-size:13px;
+color:#aaa;
+margin-top:7px;
+}
+
+/* REQUEST */
+
+.request{
+padding:15px;
+border:1px solid #272f40;
+border-radius:12px;
+margin-top:10px;
+background:#0c1018;
+}
+
+.request p{
+color:#aaa;
+margin-top:6px;
+}
+
+.request button{
+margin-top:10px;
+margin-right:5px;
+}
+
+/* SEPARATOR */
+
+hr{
+border:0;
+border-top:1px solid #272f40;
+margin:25px 0;
 }
 
 .empty{
-    text-align:center;
-    color:#94a3b8;
-    padding:20px;
+color:#777;
+padding:30px;
+text-align:center;
 }
 
+/* MOBILE */
 
-/* =========================
-   FILE BOX
-========================= */
+@media(max-width:700px){
 
-.fileBox{
-    background:#101522;
-    border:1px dashed #334155;
-    border-radius:10px;
-    padding:12px;
-    margin-bottom:12px;
+.product,
+.clip{
+flex-direction:column;
 }
 
-.fileName{
-    color:#94a3b8;
-    font-size:13px;
-    margin-top:5px;
-    word-break:break-all;
+.product img,
+.clip-cover{
+width:100%;
+height:190px;
 }
 
-.preview{
-    max-width:180px;
-    max-height:120px;
-    object-fit:cover;
-    border-radius:10px;
-    display:none;
-    margin-top:8px;
+.form-buttons{
+flex-direction:column;
 }
 
-
-/* =========================
-   UPLOAD PROGRESS
-========================= */
-
-.progressBox{
-    display:none;
-    margin-top:15px;
-    background:#101522;
-    border-radius:10px;
-    padding:12px;
+.form-buttons button{
+width:100%;
 }
-
-progress{
-    width:100%;
-    height:20px;
-}
-
-.progressText{
-    font-size:13px;
-    color:#cbd5e1;
-    margin-bottom:7px;
-}
-
-
-/* =========================
-   NOTIFICATION
-========================= */
-
-#noticeBtn{
-    position:relative;
-    background:#20283a;
-}
-
-#noticeCount{
-    position:absolute;
-    right:-6px;
-    top:-7px;
-
-    background:#ef4444;
-
-    border-radius:50%;
-
-    min-width:20px;
-    height:20px;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    font-size:11px;
-}
-
-#noticePanel{
-    display:none;
-
-    position:fixed;
-
-    right:20px;
-    top:70px;
-
-    width:min(430px,calc(100vw - 40px));
-
-    max-height:70vh;
-
-    overflow:auto;
-
-    background:#0e1320;
-
-    border:1px solid #334155;
-
-    border-radius:14px;
-
-    padding:14px;
-
-    z-index:100;
-
-    box-shadow:0 20px 60px #000;
-}
-
-.notice{
-    padding:12px;
-    border-bottom:1px solid #273044;
-}
-
-.notice:last-child{
-    border-bottom:0;
-}
-
-.noticeMeta{
-    font-size:12px;
-    color:#94a3b8;
-    margin-top:5px;
-}
-
-.noticeUnread{
-    border-left:3px solid #5865f2;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
-
-    body{
-        padding:10px;
-    }
-
-    header{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    header > div:last-child{
-        width:100%;
-    }
-
-    header button{
-        flex:1;
-    }
-
-    #noticePanel{
-        right:10px;
-        width:calc(100vw - 20px);
-    }
 
 }
 
@@ -334,181 +362,118 @@ progress{
 <body>
 
 
-<!-- =========================
-     LOGIN
-========================= -->
-
-<div
-id="loginBox"
-class="card"
->
-
-    <h1>
-        🔐 Admin Panel
-    </h1>
-
-    <p
-    class="small"
-    style="margin:12px"
-    >
-        เข้าสู่ระบบด้วย Gmail แอดมิน
-    </p>
-
-    <button id="loginBtn">
-        เข้าสู่ระบบ Google
-    </button>
-
-    <p
-    id="loginMsg"
-    class="small"
-    style="margin-top:12px"
-    >
-    </p>
-
-</div>
-
-
-
-<!-- =========================
-     APP
-========================= -->
-
-<div
-id="app"
-class="container"
->
-
-
 <header>
 
-<div>
-
 <h1>
-🛠️ Admin Panel
+⚙️ ROBLOX DEV ADMIN
 </h1>
-
-<div
-id="adminEmail"
-class="small"
->
-</div>
-
-</div>
-
-
-<div
-style="
-display:flex;
-gap:8px;
-"
->
-
-<button id="noticeBtn">
-
-🔔 แจ้งเตือน
-
-<span id="noticeCount">
-</span>
-
-</button>
-
-
-<button id="logoutBtn">
-ออกจากระบบ
-</button>
-
-</div>
 
 </header>
 
 
+<!-- LOGIN -->
 
-<!-- =========================
-     NOTIFICATION
-========================= -->
+<section
+id="loginBox"
+class="login panel">
 
-<div id="noticePanel">
+<h2>
+🔐 เข้าสู่ระบบหลังบ้าน
+</h2>
 
-<div
-style="
+<p style="color:#aaa;margin-bottom:20px">
+เฉพาะผู้ดูแลระบบเท่านั้น
+</p>
+
+<button
+id="googleLogin"
+class="primary"
+style="width:100%">
+
+เข้าสู่ระบบด้วย Google
+
+</button>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<main
+id="adminBox"
+class="container hidden">
+
+
+<!-- ==========================================
+     HEADER ADMIN
+========================================== -->
+
+<div class="panel">
+
+<div style="
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:10px;
-"
->
+gap:10px;
+flex-wrap:wrap;
+">
 
-<h3>
-🔔 แจ้งเตือน
-</h3>
+<div>
+
+<h2 style="margin-bottom:5px">
+👑 แผงควบคุม Admin
+</h2>
+
+<div id="status"
+class="status"
+style="margin:0">
+
+กำลังโหลด...
+
+</div>
+
+</div>
 
 <button
-id="readAllBtn"
-class="success"
->
+id="logout"
+class="logout">
 
-อ่านทั้งหมด
+ออกจากระบบ
 
 </button>
 
 </div>
 
-
-<div id="noticeList">
-
-<div class="small">
-กำลังโหลดแจ้งเตือน...
-</div>
-
-</div>
-
 </div>
 
 
-
-<!-- =========================
+<!-- ==========================================
      ADD PRODUCT
-========================= -->
+========================================== -->
 
-<section class="card">
+<div class="panel">
 
 <h2>
-➕ เพิ่มสินค้า
+📦 เพิ่มสินค้า
 </h2>
 
-<p
-class="small"
-style="margin-bottom:15px"
->
-เลือกไฟล์จากเครื่องของคุณได้โดยตรง
-</p>
-
-
-<div class="grid">
-
-
-<!-- LEFT -->
-
-<div>
 
 <label>
 ชื่อสินค้า
 </label>
 
 <input
-id="pTitle"
-placeholder="ชื่อสินค้า"
->
+id="title"
+placeholder="เช่น Roblox Police Car">
 
 
 <label>
-รายละเอียด
+รายละเอียดสินค้า
 </label>
 
 <textarea
-id="pDesc"
-placeholder="รายละเอียดสินค้า"
-></textarea>
+id="description"
+placeholder="รายละเอียดสินค้า"></textarea>
 
 
 <label>
@@ -516,9 +481,23 @@ placeholder="รายละเอียดสินค้า"
 </label>
 
 <input
-id="pCategory"
-placeholder="เช่น UI, Script, Model"
->
+id="category"
+list="categoryList"
+placeholder="เลือกหรือพิมพ์หมวดหมู่">
+
+<datalist id="categoryList">
+
+<option value="Model">
+<option value="Script">
+<option value="UI">
+<option value="System">
+<option value="3D Model">
+<option value="Map">
+<option value="Animation">
+<option value="VFX">
+<option value="อื่นๆ">
+
+</datalist>
 
 
 <label>
@@ -526,11 +505,91 @@ placeholder="เช่น UI, Script, Model"
 </label>
 
 <input
-id="pPrice"
+id="price"
 type="number"
-min="0"
-placeholder="ราคา"
->
+placeholder="500">
+
+
+<!-- IMAGE -->
+
+<div class="upload-box">
+
+<div class="upload-title">
+🖼️ รูปสินค้า
+</div>
+
+<input
+id="imageFile"
+type="file"
+accept="image/*">
+
+<div class="upload-help">
+เลือกไฟล์จากเครื่อง หรือใส่ URL ด้านล่าง
+</div>
+
+<input
+id="imageUrl"
+placeholder="https://.../image.jpg"
+style="margin-top:8px">
+
+</div>
+
+
+<!-- PRODUCT VIDEO -->
+
+<div class="upload-box">
+
+<div class="upload-title">
+🎬 วิดีโอสินค้า
+</div>
+
+<input
+id="productVideoFile"
+type="file"
+accept="video/*">
+
+<div class="upload-help">
+ไม่บังคับ สามารถอัปโหลดวิดีโอแนะนำสินค้าได้
+</div>
+
+<input
+id="productVideoUrl"
+placeholder="https://.../video.mp4"
+style="margin-top:8px">
+
+</div>
+
+
+<!-- 3D -->
+
+<div class="upload-box">
+
+<div class="upload-title">
+🧊 โมเดล 3D
+</div>
+
+<input
+id="modelFile"
+type="file"
+accept=".glb,model/gltf-binary">
+
+<div class="upload-help">
+รองรับไฟล์ .glb
+</div>
+
+<input
+id="modelUrl"
+placeholder="https://.../model.glb"
+style="margin-top:8px">
+
+</div>
+
+
+<!-- CONTACT -->
+
+<h3>
+💬 ช่องทางติดต่อสำหรับสินค้านี้
+</h3>
 
 
 <label>
@@ -538,9 +597,8 @@ LINE
 </label>
 
 <input
-id="pLine"
-placeholder="ลิงก์ LINE"
->
+id="line"
+placeholder="https://line.me/...">
 
 
 <label>
@@ -548,9 +606,8 @@ Facebook
 </label>
 
 <input
-id="pFacebook"
-placeholder="ลิงก์ Facebook"
->
+id="facebook"
+placeholder="https://facebook.com/...">
 
 
 <label>
@@ -558,319 +615,65 @@ Discord
 </label>
 
 <input
-id="pDiscord"
-placeholder="ลิงก์ Discord"
->
-
-</div>
-
-
-
-<!-- RIGHT -->
-
-<div>
-
-
-<!-- IMAGE -->
-
-<div class="fileBox">
-
-<label>
-🖼️ รูปสินค้า
-</label>
-
-<input
-id="pImageFile"
-type="file"
-accept="image/*"
->
-
-<div
-id="pImageName"
-class="fileName"
->
-ยังไม่ได้เลือกไฟล์
-</div>
-
-<img
-id="pImagePreview"
-class="preview"
->
-
-</div>
-
-
-
-<!-- VIDEO -->
-
-<div class="fileBox">
-
-<label>
-🎬 วิดีโอสินค้า
-</label>
-
-<input
-id="pVideoFile"
-type="file"
-accept="video/*"
->
-
-<div
-id="pVideoName"
-class="fileName"
->
-ยังไม่ได้เลือกไฟล์
-</div>
-
-</div>
-
-
-
-<!-- MODEL -->
-
-<div class="fileBox">
-
-<label>
-📦 โมเดล 3D
-</label>
-
-<input
-id="pModelFile"
-type="file"
-accept=".glb,model/gltf-binary"
->
-
-<div
-id="pModelName"
-class="fileName"
->
-ยังไม่ได้เลือกไฟล์
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<button
-id="addProductBtn"
->
-
-📤 อัปโหลดและเพิ่มสินค้า
-
-</button>
+id="discord"
+placeholder="https://discord.gg/...">
 
 
 <div
-id="productProgressBox"
-class="progressBox"
->
+id="productProgress"
+class="progress-box">
+
+<div class="progress-bar">
+
+<div
+id="productProgressInner"
+class="progress-inner">
+</div>
+
+</div>
 
 <div
 id="productProgressText"
-class="progressText"
->
-กำลังเตรียม...
-</div>
+class="progress-text">
 
-<progress
-id="productProgress"
-value="0"
-max="100"
->
-</progress>
-
-</div>
-
-</section>
-
-
-
-<!-- =========================
-     ADD VIDEO
-========================= -->
-
-<section class="card">
-
-<h2>
-🎬 เพิ่มคลิป
-</h2>
-
-<p class="small">
-คลิปทุกประเภทไม่ต้องใส่ราคา
-</p>
-
-
-<label>
-ประเภทคลิป
-</label>
-
-<select id="vCategory">
-
-<option value="คลิปโปรโมทสินค้า">
-คลิปโปรโมทสินค้า
-</option>
-
-<option value="สื่อการสอน">
-สื่อการสอน
-</option>
-
-<option value="คลิปทั่วไป">
-คลิปทั่วไป
-</option>
-
-</select>
-
-
-
-<div id="bindBox">
-
-<label>
-สินค้าที่โปรโมท
-</label>
-
-<select id="vProduct">
-
-<option value="">
--- เลือกสินค้า --
-</option>
-
-</select>
-
-</div>
-
-
-
-<label>
-ชื่อคลิป
-</label>
-
-<input
-id="vTitle"
-placeholder="ชื่อคลิป"
->
-
-
-
-<label>
-รายละเอียด
-</label>
-
-<textarea
-id="vDesc"
-placeholder="รายละเอียดคลิป"
-></textarea>
-
-
-
-<div class="grid">
-
-
-<!-- VIDEO -->
-
-<div class="fileBox">
-
-<label>
-🎞️ วิดีโอจากเครื่อง
-</label>
-
-<input
-id="vVideoFile"
-type="file"
-accept="video/*"
->
-
-<div
-id="vVideoName"
-class="fileName"
->
-ยังไม่ได้เลือกไฟล์
-</div>
-
-</div>
-
-
-
-<!-- COVER -->
-
-<div class="fileBox">
-
-<label>
-🖼️ รูปปกจากเครื่อง
-</label>
-
-<input
-id="vCoverFile"
-type="file"
-accept="image/*"
->
-
-<div
-id="vCoverName"
-class="fileName"
->
-ยังไม่ได้เลือกไฟล์
-</div>
-
-<img
-id="vCoverPreview"
-class="preview"
->
+กำลังอัปโหลด...
 
 </div>
 
 </div>
 
 
+<div class="form-buttons">
 
 <button
-id="addVideoBtn"
->
+id="addProduct"
+class="primary">
 
-📤 อัปโหลดและเพิ่มคลิป
+➕ เพิ่มสินค้า
 
 </button>
 
+<button
+id="clearProduct"
+class="logout">
 
-<div
-id="videoProgressBox"
-class="progressBox"
->
+🧹 ล้างข้อมูล
 
-<div
-id="videoProgressText"
-class="progressText"
->
-กำลังเตรียม...
-</div>
-
-<progress
-id="videoProgress"
-value="0"
-max="100"
->
-</progress>
+</button>
 
 </div>
 
-</section>
+</div>
 
 
+<!-- ==========================================
+     PRODUCT LIST
+========================================== -->
 
-<!-- =========================
-     PRODUCTS
-========================= -->
-
-<section
-class="card"
-id="products"
->
+<div class="panel">
 
 <h2>
-📦 สินค้า
+🛍️ สินค้าทั้งหมด
 </h2>
 
 <div id="productList">
@@ -879,41 +682,228 @@ id="products"
 
 </div>
 
-</section>
+</div>
 
 
+<!-- ==========================================
+     ADD CLIP
+========================================== -->
 
-<!-- =========================
-     VIDEOS
-========================= -->
-
-<section
-class="card"
-id="videos"
->
+<div class="panel">
 
 <h2>
-🎞️ คลิปทั้งหมด
+🎬 อัปโหลดคลิป
 </h2>
 
-<div id="videoList">
+<p style="
+color:#888;
+font-size:13px;
+margin-bottom:15px;
+">
+
+เลือกประเภทคลิปที่ต้องการอัปโหลด
+
+</p>
+
+
+<label>
+ประเภทคลิป
+</label>
+
+<select id="clipCategory">
+
+<option value="คลิปโปรโมทสินค้า">
+📢 คลิปโปรโมทสินค้า
+</option>
+
+<option value="สื่อการสอน">
+📚 สื่อการสอน
+</option>
+
+<option value="คลิปทั่วไป">
+🎬 คลิปทั่วไป
+</option>
+
+</select>
+
+
+<!-- PRODUCT PROMO -->
+
+<div
+id="promoArea"
+class="upload-box">
+
+<div class="upload-title">
+📢 ตั้งค่าสำหรับคลิปโปรโมทสินค้า
+</div>
+
+<label>
+เลือกสินค้าที่โปรโมท
+</label>
+
+<select id="promoProduct">
+
+<option value="">
+-- ไม่เลือกสินค้า --
+</option>
+
+</select>
+
+<p class="upload-help">
+สามารถเลือกสินค้าที่คลิปนี้กำลังโปรโมทได้
+</p>
+
+</div>
+
+
+<label>
+ชื่อคลิป
+</label>
+
+<input
+id="clipTitle"
+placeholder="เช่น วิธีสร้างระบบรถ">
+
+
+<label>
+รายละเอียดคลิป
+</label>
+
+<textarea
+id="clipDescription"
+placeholder="รายละเอียดของคลิป"></textarea>
+
+
+<!-- VIDEO -->
+
+<div class="upload-box">
+
+<div class="upload-title">
+🎥 ไฟล์วิดีโอ
+</div>
+
+<input
+id="clipFile"
+type="file"
+accept="video/*">
+
+<div class="upload-help">
+อัปโหลดวิดีโอจากเครื่อง
+</div>
+
+</div>
+
+
+<!-- VIDEO URL -->
+
+<div class="upload-box">
+
+<div class="upload-title">
+🔗 หรือ URL วิดีโอ
+</div>
+
+<input
+id="clipUrl"
+placeholder="https://.../video.mp4">
+
+</div>
+
+
+<!-- COVER -->
+
+<div class="upload-box">
+
+<div class="upload-title">
+🖼️ ภาพปกคลิป
+</div>
+
+<input
+id="clipCoverFile"
+type="file"
+accept="image/*">
+
+<input
+id="clipCoverUrl"
+placeholder="https://.../cover.jpg"
+style="margin-top:8px">
+
+</div>
+
+
+<div
+id="clipProgress"
+class="progress-box">
+
+<div class="progress-bar">
+
+<div
+id="clipProgressInner"
+class="progress-inner">
+</div>
+
+</div>
+
+<div
+id="clipProgressText"
+class="progress-text">
+
+กำลังอัปโหลด...
+
+</div>
+
+</div>
+
+
+<div class="form-buttons">
+
+<button
+id="addClip"
+class="primary">
+
+⬆️ อัปโหลดคลิป
+
+</button>
+
+<button
+id="clearClip"
+class="logout">
+
+🧹 ล้างข้อมูล
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ==========================================
+     CLIP LIST
+========================================== -->
+
+<div class="panel">
+
+<h2>
+📺 คลิปทั้งหมด
+</h2>
+
+<div id="clipList">
 
 กำลังโหลด...
 
 </div>
 
-</section>
+</div>
 
 
+<!-- ==========================================
+     ACCESS REQUEST
+========================================== -->
 
-<!-- =========================
-     ACCESS
-========================= -->
-
-<section class="card">
+<div class="panel">
 
 <h2>
-👥 คำขอเข้าเรียน
+📚 คำขอเข้าสื่อการสอน
 </h2>
 
 <div id="requestList">
@@ -922,10 +912,10 @@ id="videos"
 
 </div>
 
-</section>
-
 </div>
 
+
+</main>
 
 
 <script type="module">
@@ -939,7 +929,7 @@ import {
 initializeApp
 }
 from
-"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 
 /* ==================================================
@@ -954,7 +944,7 @@ onAuthStateChanged,
 signOut
 }
 from
-"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
 
 /* ==================================================
@@ -965,16 +955,14 @@ import {
 getFirestore,
 collection,
 addDoc,
-doc,
-updateDoc,
 deleteDoc,
+doc,
 onSnapshot,
-query,
-orderBy,
-serverTimestamp
+serverTimestamp,
+updateDoc
 }
 from
-"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
 /* ==================================================
@@ -989,7 +977,7 @@ getDownloadURL,
 deleteObject
 }
 from
-"https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-storage.js";
 
 
 /* ==================================================
@@ -1004,917 +992,358 @@ from
 "./firebase-config.js";
 
 
-
 /* ==================================================
-   FIREBASE
+   INIT
 ================================================== */
 
 const app =
-initializeApp(
-firebaseConfig
-);
-
+initializeApp(firebaseConfig);
 
 const auth =
 getAuth(app);
 
-
 const db =
 getFirestore(app);
-
 
 const storage =
 getStorage(app);
 
-
 const provider =
 new GoogleAuthProvider();
 
-
-
-/* ==================================================
-   HELPER
-================================================== */
-
-const $ =
-id =>
-document.getElementById(id);
-
-
-const esc =
-s =>
-String(s ?? "")
-.replace(
-/[&<>"']/g,
-c =>
-({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[c])
-);
-
-
-
-let products = [];
-
-let notices = [];
-
-let clips = [];
-
-let noticeUnsub = null;
-
-
-
-/* ==================================================
-   FILE NAME
-================================================== */
-
-function safeFileName(name){
-
-return name
-.replace(
-/[^a-zA-Z0-9ก-๙._-]/g,
-"_"
-);
-
-}
-
-
-
-/* ==================================================
-   FILE SIZE
-================================================== */
-
-function fileSize(bytes){
-
-if(bytes < 1024){
-
-return bytes + " B";
-
-}
-
-if(bytes < 1024 * 1024){
-
-return (
-bytes / 1024
-).toFixed(1)
-+
-" KB";
-
-}
-
-if(bytes < 1024 * 1024 * 1024){
-
-return (
-bytes /
-(1024 * 1024)
-).toFixed(1)
-+
-" MB";
-
-}
-
-return (
-bytes /
-(1024 * 1024 * 1024)
-).toFixed(2)
-+
-" GB";
-
-}
-
-
-
-/* ==================================================
-   SHOW FILE
-================================================== */
-
-function showFile(
-inputId,
-nameId,
-previewId = null
-){
-
-$(inputId).addEventListener(
-"change",
-() => {
-
-const file =
-$(inputId).files[0];
-
-
-if(!file){
-
-$(nameId)
-.textContent =
-"ยังไม่ได้เลือกไฟล์";
-
-if(previewId){
-
-$(previewId)
-.style.display =
-"none";
-
-}
-
-return;
-
-}
-
-
-$(nameId)
-.textContent =
-"📄 "
-+
-file.name
-+
-" • "
-+
-fileSize(
-file.size
-);
-
-
-if(
-previewId &&
-file.type.startsWith(
-"image/"
-)
-){
-
-const url =
-URL.createObjectURL(
-file
-);
-
-
-$(previewId).src =
-url;
-
-
-$(previewId)
-.style.display =
-"block";
-
-}
-
-}
-);
-
-}
-
-
-
-showFile(
-"pImageFile",
-"pImageName",
-"pImagePreview"
-);
-
-
-showFile(
-"pVideoFile",
-"pVideoName"
-);
-
-
-showFile(
-"pModelFile",
-"pModelName"
-);
-
-
-showFile(
-"vVideoFile",
-"vVideoName"
-);
-
-
-showFile(
-"vCoverFile",
-"vCoverName",
-"vCoverPreview"
-);
-
-
-
-/* ==================================================
-   UPLOAD FILE
-================================================== */
-
-function uploadFile(
-file,
-folder,
-progressElement,
-progressText,
-label
-){
-
-return new Promise(
-(resolve,reject)=>{
-
-
-const fileName =
-Date.now()
-+
-"_"
-+
-Math.random()
-.toString(36)
-.substring(2,10)
-+
-"_"
-+
-safeFileName(
-file.name
-);
-
-
-const storageRef =
-ref(
-storage,
-folder +
-fileName
-);
-
-
-const metadata = {
-
-contentType:
-file.type ||
-(
-file.name
-.toLowerCase()
-.endsWith(".glb")
-?
-"model/gltf-binary"
-:
-"application/octet-stream"
-)
-
-};
-
-
-const uploadTask =
-uploadBytesResumable(
-storageRef,
-file,
-metadata
-);
-
-
-uploadTask.on(
-
-"state_changed",
-
-snapshot => {
-
-
-const percent =
-Math.round(
-(
-snapshot.bytesTransferred /
-snapshot.totalBytes
-)
-*
-100
-);
-
-
-progressElement.value =
-percent;
-
-
-progressText.textContent =
-label
-+
-" "
-+
-percent
-+
-"%";
-
-},
-
-
-error => {
-
-reject(error);
-
-},
-
-
-async () => {
-
-try{
-
-
-const url =
-await getDownloadURL(
-uploadTask.snapshot.ref
-);
-
-
-resolve({
-
-url:url,
-
-path:
-uploadTask.snapshot.ref
-.fullPath
-
+provider.setCustomParameters({
+prompt:"select_account"
 });
 
 
-}
+/* ==================================================
+   ELEMENTS
+================================================== */
 
-catch(error){
+const loginBox =
+document.getElementById("loginBox");
 
-reject(error);
+const adminBox =
+document.getElementById("adminBox");
 
-}
-
-}
-
-);
-
-});
-
-}
-
+const statusBox =
+document.getElementById("status");
 
 
 /* ==================================================
-   FORMAT TIME
+   GOOGLE LOGIN
 ================================================== */
 
-function formatTime(
-timestamp
-){
-
-if(
-!timestamp ||
-!timestamp.toDate
-){
-
-return "เมื่อสักครู่";
-
-}
-
-return timestamp
-.toDate()
-.toLocaleString(
-"th-TH",
-{
-dateStyle:"short",
-timeStyle:"short"
-}
-);
-
-}
-
-
-
-/* ==================================================
-   NOTIFICATION
-================================================== */
-
-async function createNotification(
-title,
-detail,
-page
-){
-
-await addDoc(
-collection(
-db,
-"notifications"
-),
-{
-
-title:title,
-
-detail:detail,
-
-page:page,
-
-read:false,
-
-createdBy:
-auth.currentUser?.email || "",
-
-createdAt:
-serverTimestamp()
-
-}
-);
-
-}
-
-
-
-/* ==================================================
-   NOTIFICATION LIST
-================================================== */
-
-function listenNotifications(){
-
-if(noticeUnsub){
-
-noticeUnsub();
-
-}
-
-
-const q =
-query(
-collection(
-db,
-"notifications"
-),
-orderBy(
-"createdAt",
-"desc"
-)
-);
-
-
-noticeUnsub =
-onSnapshot(
-q,
-snapshot => {
-
-notices =
-snapshot.docs
-.map(
-d => ({
-id:d.id,
-...d.data()
-})
-)
-.slice(
-0,
-50
-);
-
-
-renderNotifications();
-
-}
-);
-
-}
-
-
-
-/* ==================================================
-   RENDER NOTIFICATIONS
-================================================== */
-
-function renderNotifications(){
-
-const box =
-$("noticeList");
-
-
-if(!notices.length){
-
-box.innerHTML =
-`
-<div class="small">
-ยังไม่มีแจ้งเตือน
-</div>
-`;
-
-}
-
-else{
-
-box.innerHTML =
-notices
-.map(
-n => `
-
-<div
-class="
-notice
-${n.read ? "" : "noticeUnread"}
-"
->
-
-<b>
-${esc(n.title)}
-</b>
-
-<div
-style="margin-top:5px"
->
-
-${esc(n.detail)}
-
-</div>
-
-<div
-class="noticeMeta"
->
-
-📍 หน้า:
-${esc(n.page)}
-
-<br>
-
-🕐
-${formatTime(
-n.createdAt
-)}
-
-</div>
-
-
-<button
-class="openNotice"
-data-id="${n.id}"
-style="
-margin-top:8px;
-padding:7px 10px;
-"
->
-
-เปิดหน้า
-
-</button>
-
-</div>
-
-`
-)
-.join("");
-
-}
-
-
-
-const unread =
-notices.filter(
-n => !n.read
-).length;
-
-
-const count =
-$("noticeCount");
-
-
-count.textContent =
-unread;
-
-
-count.style.display =
-unread
-?
-"inline-flex"
-:
-"none";
-
-}
-
-
-
-/* ==================================================
-   NOTICE BUTTON
-================================================== */
-
-$("noticeBtn").onclick =
-() => {
-
-const panel =
-$("noticePanel");
-
-
-panel.style.display =
-panel.style.display ===
-"block"
-?
-"none"
-:
-"block";
-
-};
-
-
-
-/* ==================================================
-   READ ALL
-================================================== */
-
-$("readAllBtn").onclick =
-async () => {
-
-const unread =
-notices.filter(
-n => !n.read
-);
-
-
-for(
-const n
-of unread
-){
-
-await updateDoc(
-doc(
-db,
-"notifications",
-n.id
-),
-{
-read:true
-}
-);
-
-}
-
-};
-
-
-
-/* ==================================================
-   OPEN NOTICE
-================================================== */
-
-$("noticeList").onclick =
-async e => {
-
-if(
-!e.target.classList
-.contains(
-"openNotice"
-)
-){
-
-return;
-
-}
-
-
-const id =
-e.target.dataset.id;
-
-
-const n =
-notices.find(
-x =>
-x.id === id
-);
-
-
-if(!n){
-
-return;
-
-}
-
-
-if(!n.read){
-
-await updateDoc(
-doc(
-db,
-"notifications",
-n.id
-),
-{
-read:true
-}
-);
-
-}
-
-
-$("noticePanel")
-.style.display =
-"none";
-
-
-if(
-n.page ===
-"สินค้า"
-){
-
-location.hash =
-"#products";
-
-}
-
-else{
-
-location.hash =
-"#videos";
-
-}
-
-};
-
-
-
-/* ==================================================
-   LOGIN
-================================================== */
-
-$("loginBtn").onclick =
-async () => {
+document
+.getElementById("googleLogin")
+.addEventListener(
+"click",
+async()=>{
 
 try{
 
-const result =
 await signInWithPopup(
 auth,
 provider
 );
 
-
-if(
-result.user.email !==
-ADMIN_EMAIL
-){
-
-await signOut(auth);
-
-
-$("loginMsg")
-.textContent =
-"บัญชีนี้ไม่มีสิทธิ์แอดมิน";
-
-}
-
-}
-
-catch(error){
+}catch(error){
 
 console.error(error);
 
-
-$("loginMsg")
-.textContent =
-"เข้าสู่ระบบไม่สำเร็จ: "
-+
-error.message;
+alert(
+"เข้าสู่ระบบไม่สำเร็จ\n\n"+
+error.code+
+"\n"+
+error.message
+);
 
 }
 
-};
+});
 
+
+/* ==================================================
+   AUTH
+================================================== */
+
+onAuthStateChanged(
+auth,
+user=>{
+
+if(!user){
+
+loginBox.classList.remove("hidden");
+
+adminBox.classList.add("hidden");
+
+return;
+
+}
+
+
+const email =
+(user.email || "")
+.toLowerCase()
+.trim();
+
+
+const adminEmail =
+(ADMIN_EMAIL ||
+"mokll0081@gmail.com")
+.toLowerCase()
+.trim();
+
+
+if(
+email !== adminEmail
+){
+
+alert(
+"บัญชีนี้ไม่มีสิทธิ์เข้าหลังบ้าน"
+);
+
+signOut(auth);
+
+return;
+
+}
+
+
+loginBox.classList.add("hidden");
+
+adminBox.classList.remove("hidden");
+
+statusBox.innerHTML =
+"เข้าสู่ระบบเป็น: <b>"+
+esc(user.email || "")+
+"</b>";
+
+loadProducts();
+
+loadRequests();
+
+loadClips();
+
+});
 
 
 /* ==================================================
    LOGOUT
 ================================================== */
 
-$("logoutBtn").onclick =
-() =>
-signOut(auth);
+document
+.getElementById("logout")
+.addEventListener(
+"click",
+async()=>{
 
+await signOut(auth);
+
+});
 
 
 /* ==================================================
-   AUTH STATE
+   STORAGE UPLOAD
 ================================================== */
 
-onAuthStateChanged(
-auth,
-user => {
-
-if(!user){
-
-$("loginBox")
-.style.display =
-"block";
-
-
-$("app")
-.style.display =
-"none";
-
-
-return;
-
-}
-
-
-if(
-user.email !==
-ADMIN_EMAIL
+function uploadFile(
+file,
+path,
+progressCallback
 ){
 
-signOut(auth);
+return new Promise(
+(resolve,reject)=>{
 
-return;
-
-}
-
-
-$("loginBox")
-.style.display =
-"none";
-
-
-$("app")
-.style.display =
-"block";
-
-
-$("adminEmail")
-.textContent =
-user.email;
-
-
-listenNotifications();
-
-loadProducts();
-
-loadClips();
-
-loadRequests();
-
-}
+const storageRef =
+ref(
+storage,
+path
 );
 
 
+const upload =
+uploadBytesResumable(
+storageRef,
+file
+);
+
+
+upload.on(
+"state_changed",
+
+snapshot=>{
+
+const percent =
+(
+snapshot.bytesTransferred /
+snapshot.totalBytes
+)*100;
+
+if(progressCallback){
+
+progressCallback(
+percent
+);
+
+}
+
+},
+
+error=>{
+
+reject(error);
+
+},
+
+async()=>{
+
+try{
+
+const url =
+await getDownloadURL(
+upload.snapshot.ref
+);
+
+resolve({
+
+url,
+path
+
+});
+
+}catch(error){
+
+reject(error);
+
+}
+
+}
+
+);
+
+});
+
+}
+
 
 /* ==================================================
-   VIDEO CATEGORY
+   PRODUCT PROGRESS
 ================================================== */
 
-$("vCategory").onchange =
-() => {
+function productProgress(
+percent,
+text
+){
 
-$("bindBox")
-.style.display =
-$("vCategory").value ===
-"คลิปโปรโมทสินค้า"
-?
-"block"
-:
-"none";
+const box =
+document.getElementById(
+"productProgress"
+);
 
-};
+const inner =
+document.getElementById(
+"productProgressInner"
+);
 
+const txt =
+document.getElementById(
+"productProgressText"
+);
+
+box.style.display =
+"block";
+
+inner.style.width =
+percent+"%";
+
+txt.textContent =
+text ||
+"กำลังอัปโหลด "+Math.round(percent)+"%";
+
+}
 
 
 /* ==================================================
    ADD PRODUCT
 ================================================== */
 
-$("addProductBtn").onclick =
-async () => {
+document
+.getElementById("addProduct")
+.addEventListener(
+"click",
+async()=>{
 
+const btn =
+document.getElementById(
+"addProduct"
+);
 
 const title =
-$("pTitle")
-.value
-.trim();
+document.getElementById(
+"title"
+).value.trim();
+
+const description =
+document.getElementById(
+"description"
+).value.trim();
+
+const category =
+document.getElementById(
+"category"
+).value.trim();
+
+const price =
+document.getElementById(
+"price"
+).value.trim();
+
+const imageFile =
+document.getElementById(
+"imageFile"
+).files[0];
+
+const imageUrl =
+document.getElementById(
+"imageUrl"
+).value.trim();
+
+const videoFile =
+document.getElementById(
+"productVideoFile"
+).files[0];
+
+const videoUrl =
+document.getElementById(
+"productVideoUrl"
+).value.trim();
+
+const modelFile =
+document.getElementById(
+"modelFile"
+).files[0];
+
+const modelUrl =
+document.getElementById(
+"modelUrl"
+).value.trim();
+
+const line =
+document.getElementById(
+"line"
+).value.trim();
+
+const facebook =
+document.getElementById(
+"facebook"
+).value.trim();
+
+const discord =
+document.getElementById(
+"discord"
+).value.trim();
 
 
 if(!title){
@@ -1928,128 +1357,490 @@ return;
 }
 
 
+try{
 
-const imageFile =
-$("pImageFile")
-.files[0];
+btn.disabled =
+true;
 
-
-const videoFile =
-$("pVideoFile")
-.files[0];
+btn.textContent =
+"กำลังเพิ่มสินค้า...";
 
 
-const modelFile =
-$("pModelFile")
-.files[0];
+let image =
+imageUrl;
+
+let video =
+videoUrl;
+
+let model3d =
+modelUrl;
+
+let imagePath =
+"";
+
+let videoPath =
+"";
+
+let modelPath =
+"";
 
 
-if(
-!imageFile &&
-!videoFile &&
-!modelFile
-){
+/* IMAGE */
+
+if(imageFile){
+
+productProgress(
+0,
+"กำลังอัปโหลดรูป..."
+);
+
+const result =
+await uploadFile(
+imageFile,
+"products/images/"+
+Date.now()+
+"_"+safeFileName(
+imageFile.name
+),
+percent=>{
+
+productProgress(
+percent,
+"กำลังอัปโหลดรูป "+
+Math.round(percent)+"%"
+);
+
+}
+);
+
+image =
+result.url;
+
+imagePath =
+result.path;
+
+}
+
+
+/* VIDEO */
+
+if(videoFile){
+
+productProgress(
+0,
+"กำลังอัปโหลดวิดีโอ..."
+);
+
+const result =
+await uploadFile(
+videoFile,
+"products/videos/"+
+Date.now()+
+"_"+safeFileName(
+videoFile.name
+),
+percent=>{
+
+productProgress(
+percent,
+"กำลังอัปโหลดวิดีโอ "+
+Math.round(percent)+"%"
+);
+
+}
+);
+
+video =
+result.url;
+
+videoPath =
+result.path;
+
+}
+
+
+/* MODEL */
+
+if(modelFile){
+
+productProgress(
+0,
+"กำลังอัปโหลดโมเดล 3D..."
+);
+
+const result =
+await uploadFile(
+modelFile,
+"products/models/"+
+Date.now()+
+"_"+safeFileName(
+modelFile.name
+),
+percent=>{
+
+productProgress(
+percent,
+"กำลังอัปโหลดโมเดล "+
+Math.round(percent)+"%"
+);
+
+}
+);
+
+model3d =
+result.url;
+
+modelPath =
+result.path;
+
+}
+
+
+/* FIRESTORE */
+
+await addDoc(
+collection(db,"products"),
+{
+
+title,
+description,
+category,
+price,
+
+image,
+video,
+model3d,
+
+imagePath,
+videoPath,
+modelPath,
+
+line,
+facebook,
+discord,
+
+createdAt:
+serverTimestamp()
+
+}
+);
+
 
 alert(
-"กรุณาเลือกไฟล์สินค้าอย่างน้อย 1 ไฟล์"
+"✅ เพิ่มสินค้าเรียบร้อย"
 );
+
+
+clearProduct();
+
+
+document.getElementById(
+"productProgress"
+).style.display =
+"none";
+
+
+}catch(error){
+
+console.error(
+"ADD PRODUCT ERROR:",
+error
+);
+
+alert(
+"เพิ่มสินค้าไม่สำเร็จ\n\n"+
+error.code+
+"\n"+
+error.message
+);
+
+}
+finally{
+
+btn.disabled =
+false;
+
+btn.textContent =
+"➕ เพิ่มสินค้า";
+
+}
+
+});
+
+
+/* ==================================================
+   CLEAR PRODUCT
+================================================== */
+
+function clearProduct(){
+
+[
+"title",
+"description",
+"price",
+"imageUrl",
+"productVideoUrl",
+"modelUrl",
+"line",
+"facebook",
+"discord"
+]
+.forEach(id=>{
+
+document.getElementById(id).value="";
+
+});
+
+
+document.getElementById(
+"category"
+).value="";
+
+
+document.getElementById(
+"imageFile"
+).value="";
+
+document.getElementById(
+"productVideoFile"
+).value="";
+
+document.getElementById(
+"modelFile"
+).value="";
+
+}
+
+
+document
+.getElementById("clearProduct")
+.addEventListener(
+"click",
+clearProduct
+);
+
+
+/* ==================================================
+   LOAD PRODUCTS
+================================================== */
+
+function loadProducts(){
+
+onSnapshot(
+collection(db,"products"),
+
+snapshot=>{
+
+const box =
+document.getElementById(
+"productList"
+);
+
+
+updatePromoProducts(
+snapshot
+);
+
+
+if(snapshot.empty){
+
+box.innerHTML =
+`<div class="empty">
+ยังไม่มีสินค้า
+</div>`;
 
 return;
 
 }
 
 
+box.innerHTML =
+snapshot.docs
+.map(item=>{
 
-try{
-
-
-$("addProductBtn")
-.disabled =
-true;
-
-
-$("productProgressBox")
-.style.display =
-"block";
+const x =
+item.data();
 
 
-$("productProgress")
-.value =
-0;
+return `
 
+<div class="product">
 
+${
+x.image
+?
+`
+<img
+src="${esc(x.image)}"
+alt="">
+`
+:
+`
+<img
+src=""
+alt="">
+`
+}
 
-let imageData =
-null;
+<div class="product-info">
 
+<h3>
+${esc(x.title || "สินค้า")}
+</h3>
 
-let videoData =
-null;
+<p>
+${esc(x.description || "")}
+</p>
 
+<p>
+หมวดหมู่:
+${esc(x.category || "ไม่ระบุ")}
+</p>
 
-let modelData =
-null;
+<p>
+ราคา:
+<b>฿${esc(x.price || "0")}</b>
+</p>
 
+${
+x.video
+?
+`
+<span class="badge">
+🎬 มีวิดีโอ
+</span>
+`
+:
+""
+}
 
+${
+x.model3d
+?
+`
+<span class="badge">
+🧊 มีโมเดล 3D
+</span>
+`
+:
+""
+}
 
-/* =========================
-   IMAGE
-========================= */
+</div>
 
-if(imageFile){
+<div class="actions">
 
-$("productProgressText")
-.textContent =
-"กำลังอัปโหลดรูปสินค้า...";
+<button
+class="danger"
+onclick="deleteProduct('${item.id}')">
 
+ลบ
 
-imageData =
-await uploadFile(
+</button>
 
-imageFile,
+</div>
 
-"products/images/",
+</div>
 
-$("productProgress"),
+`;
 
-$("productProgressText"),
+})
+.join("");
 
-"รูปสินค้า"
+},
+error=>{
 
+console.error(
+"PRODUCT ERROR:",
+error
 );
+
+document.getElementById(
+"productList"
+).innerHTML =
+`
+<div class="empty">
+ไม่สามารถโหลดสินค้าได้
+<br><br>
+${esc(error.message)}
+</div>
+`;
+
+});
 
 }
 
 
+/* ==================================================
+   UPDATE PROMO PRODUCT SELECT
+================================================== */
 
-/* =========================
-   VIDEO
-========================= */
-
-if(videoFile){
-
-$("productProgressText")
-.textContent =
-"กำลังอัปโหลดวิดีโอสินค้า...";
+let productCache =
+[];
 
 
-videoData =
-await uploadFile(
+function updatePromoProducts(
+snapshot
+){
 
-videoFile,
+productCache =
+snapshot.docs.map(
+item=>({
 
-"products/videos/",
+id:item.id,
+...item.data()
 
-$("productProgress"),
-
-$("productProgressText"),
-
-"วิดีโอสินค้า"
-
+})
 );
+
+
+const select =
+document.getElementById(
+"promoProduct"
+);
+
+
+const current =
+select.value;
+
+
+select.innerHTML = `
+
+<option value="">
+-- ไม่เลือกสินค้า --
+</option>
+
+`;
+
+
+productCache.forEach(
+product=>{
+
+const option =
+document.createElement(
+"option"
+);
+
+option.value =
+product.id;
+
+option.textContent =
+product.title ||
+"สินค้า";
+
+select.appendChild(
+option
+);
+
+});
+
+
+select.value =
+current;
 
 }
 
 
-
-/* ============
+/* ==================================================
+   DELETE PRODUCT
+=================================
